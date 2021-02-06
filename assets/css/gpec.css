@@ -1,0 +1,107 @@
+/*
+* Estilos CSS para GPEC
+*/
+body{
+    max-width: 100% !important;
+}
+.entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+    width: 100% !important;
+}
+.input-search{
+    width: 70% !important;    float: left;    padding: 8px;    border: solid 1px #eee;  margin-right: 1px;
+}
+.my-hidden{
+    visibility: hidden;    display: none;
+}
+.my-display{
+    visibility: visible;    display: block;
+}
+.box-advance,.btn-new-search{
+    background: #345975;    padding: 8px;    cursor: pointer;    color: #fff;    border: solid 1px #eee;
+}
+.btn-new-search{
+    width: 8%;    float: left; height: 45.2px;
+}
+.box-advance{
+    width: 20%;    float: left;    text-align: center;
+}
+.advance-fields {
+    margin-top: 15px;
+}
+.advance-fields div{
+    margin-top: 10px;
+}
+
+.content-area table td{
+    text-align: left !important;
+}
+
+.bg-primary{
+    color: #fff !important;
+}
+.title{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.checklist-form-search{
+    color: #345975;
+    border: solid 1px #e3e9ee;
+    border-radius: 4px;
+    padding: 25px 10px 25px 0;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+}
+/*for autocomplete*/
+* { box-sizing: border-box; }
+body {
+    font: 16px Arial;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+input[type=submit] {
+    background-color: DodgerBlue;
+    color: #fff;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}

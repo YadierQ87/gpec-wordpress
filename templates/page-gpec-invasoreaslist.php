@@ -28,6 +28,7 @@ get_header();
                                 $assessments = $obj->get_list_data_taxon("gpec_assessments",$internal_taxon_id);
                                 $invasive_route = $obj->get_list_data_taxon("gpec_invasive_entry_route",$internal_taxon_id);
                                 $invasive_impact = $obj->get_list_data_taxon("gpec_invasive_impact",$internal_taxon_id);
+                                $locations = $obj->get_list_data_taxon("gpec_distribution",$internal_taxon_id);
                                 //var_dump($gpec_species);
                                 ?>
 
@@ -78,19 +79,33 @@ get_header();
                                         }?>
                                     </ul>
                                     <div>Referencias:<br/>
-                                    <ul>
-                                        <?php foreach ($references as $ref){
-                                            echo "<span>".$ref->species_referencias_general."</span>";
-                                        }?>
-                                    </ul>
-                                    (sin  titular)
+                                        <ul>
+                                            <?php foreach ($references as $ref){
+                                                echo "<span>".$ref->species_referencias_general."</span>";
+                                            }?>
+                                        </ul>
+                                        (sin  titular)
                                     </div>
                                     <p>Citación recomendada:
                                         <?php foreach ($assessments as $asset){
                                             echo "<blockquote>". $asset->summary_recommended_citation."</blockquote>";
                                         }?>
                                     </p>
-                                    <?php map_block_leaflet_reder(); ?>
+                                    <div class="box-for-maps" style="margin-top: 50px;">
+                                        <strong>Location</strong>
+                                        <?php
+                                        echo do_shortcode('[leaflet-map height=350 width=100% zoomcontrol=1 scrollwheel=1 fitbounds]');
+                                        foreach ($locations as $location)
+                                        {
+                                            $munic = $location->location_municipality;
+                                            $prov = $location->location_province;
+                                            $loc_name = $location->location_name;
+                                            $lat = $location->location_latitude;
+                                            $long = $location->location_longitud;
+                                            echo do_shortcode("[leaflet-marker address='{$munic}, {$prov}' lat={$lat} lng={$long} zoom=5]{$loc_name}[/leaflet-marker]" );
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </section>

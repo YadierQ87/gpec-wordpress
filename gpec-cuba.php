@@ -47,15 +47,15 @@ function output_menu() {
       </div>
       <a href='https://es.wordpress.org/plugins/wp-csv-to-database/'>Link de Descarga en Wordpress</a>
   </p>
-  <span><strong>Map Block Leaflet</strong> (Para localizacion con mapas)
-    <div>Versión: 1.8.7
-        Autor: Jesús Olazagoitia
-        Última actualización: hace 2 semanas
-        Necesita la versión de WordPress: 5.0 o superior
-        Compatible con: 5.6.0
-    </div>
-    <a href='https://es.wordpress.org/plugins/map-block-leaflet/'>Link de Descarga en Wordpress</a>
-  </span>
+  <p><strong>Leaflet Map</strong> (Para localizacion con mapas)
+      <div>Versión: 2.22.1
+      Autor: bozdoz
+      Última actualización: hace 2 meses
+      Necesita la versión de WordPress: 4.6 o superior
+      Compatible con: 5.5.3
+      </div>
+      <a href='https://es.wordpress.org/plugins/leaflet-map/'>Link de Descarga en Wordpress</a>
+  </p>  
 </p>
   <p>Esperamos que lo disfrutes!</p>";
     echo $html;

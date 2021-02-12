@@ -52,6 +52,11 @@
                                name="species_genus" placeholder="Genus">
                     </div>
                     <div class="col-md-4">
+                        <label for=""> Species Origen </label>
+                        <?php $seleccion7 = $_POST['sel_species_origen']; ?>
+                        <?= $obj->get_combo_data("gpec_species","species_origen","--Seleccione Origen --","sel_species_origen",$seleccion7); ?>
+                    </div>
+                    <div class="col-md-4">
                         <label for=""> Invasive Impact lookup </label>
                         <?php $seleccion6 = $_POST['sel_invasive_impact_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_invasive_impact","invasive_impact_lookup","--Seleccione Impact --","sel_invasive_impact_lookup",$seleccion6); ?>
@@ -235,6 +240,7 @@
                 $impact_lookup = $_REQUEST["sel_invasive_impact_lookup"];
                 $species_grow_form = $_REQUEST["sel_species_grow_form"];
                 $sel_is_invasive = $_REQUEST["sel_is_invasive"];
+                $sel_species_origen = $_REQUEST["sel_species_origen"];#new todo put in filter
                 $radio_isweed = $_REQUEST["isweed"];
                 $radio_istransformer = $_REQUEST["istransformer"];
                 $radio_effectunknown = $_REQUEST["effectunknown"];

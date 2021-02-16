@@ -73,33 +73,31 @@
                             </label>
                         </div>
                     </div>
-
                     <div class="col-md-4">
                         <label for=""> Species Presence  </label>
                         <?php $seleccion7 = $_POST['sel_species_presence']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_presence",
                                 "--Seleccione Presence --","sel_species_presence",$seleccion7); ?>
                     </div>
-
                     <div class="col-md-4">
-                        <label for=""> redlist.category </label>
-                        <?php $seleccion8 = $_POST['sel_species_presence']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_presence",
-                                "--Seleccione Presence --","sel_species_presence",$seleccion8); ?>
+                        <label for=""> Redlist category </label>
+                        <?php $seleccion8 = $_POST['sel_redlist_category']; ?>
+                        <?= $obj->get_combo_data("gpec_assessments","redlist_category",
+                                "--Seleccione Presence --","sel_redlist_category",$seleccion8); ?>
+                        <!-- table assestment -->
                     </div>
-
                     <div class="col-md-4">
-                        <label for=""> threats.lookup </label>
-                        <?php $seleccion9 = $_POST['sel_species_presence']; ?>
+                        <label for=""> Threats Lookup </label>
+                        <?php $seleccion9 = $_POST['sel_threats_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_threats","threats_lookup",
                             "--Seleccione Threats --","sel_threats_lookup",$seleccion9); ?>
                     </div>
-
-
-
-
-
-
+                    <div class="col-md-4">
+                        <label for=""> research needs lookup </label>
+                        <?php $seleccion10 = $_POST['sel_researchneeds_lookup']; ?>
+                        <?= $obj->get_combo_data("gpec_research_needed","researchneeds_lookup",
+                            "--Seleccione Threats --","sel_researchneeds_lookup",$seleccion10); ?>
+                    </div>
                     <div class="col-md-4">
                         <label for="">InfraFamily !?</label>
                         <input type="text" autocomplete="off"
@@ -342,7 +340,7 @@
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
                             <td>
                                 <span>
-                                    <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">
+                                    <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-redlist/?id={$query[$i]->id}" ?>">
                                         <?= $query[$i]->species_htmlname ?>
                                     </a>
                                 </span>

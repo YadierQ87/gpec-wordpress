@@ -65,6 +65,9 @@
                         <?php $seleccion5 = $_POST['sel_species_grow_form']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_plant_growth_form","--Seleccione Plant --","sel_species_grow_form",$seleccion5); ?>
                     </div>
+
+                    <div class="separator col-md-12">&nbsp;</div>
+
                     <div class="col-md-4">
                         <label for=""> Species Origen </label>
                         <select class="form-control">
@@ -78,6 +81,9 @@
                         <?php $seleccion4 = $_POST['sel_is_invasive']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_is_invasive","--Seleccione Invasive --","sel_is_invasive",$seleccion4); ?>
                     </div>
+
+                    <div class="separator col-md-12">&nbsp;</div>
+
                     <div class="col-md-4">
                         <label for="">Is Weed</label>
                         <div class="form-group">
@@ -215,7 +221,7 @@
                 $addsql .= " AND impact.invasive_impact_lookup = '{$impact_lookup}' ";
             if ($protected_areas!= "")
                 $addsql .= " AND areas.ap_name LIKE '%{$protected_areas}%' ";
-            //TODO cuando este completa la bd agregar  Species Origen = Introducida or Criptogenica
+            //TODO cuando este completa la bd Siempre filtrar x Species Origen = Introducida or Criptogenica
             //if ($origen != "")
                 //$addsql .= " AND (sp.species_origin = 'Introducida' OR  sp.species_origin = 'Criptogenica') ";
             //query sql optimizadas

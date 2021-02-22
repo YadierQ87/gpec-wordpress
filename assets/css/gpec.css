@@ -35,6 +35,9 @@ body{
 .content-area table td{
     text-align: left !important;
 }
+.label-redlist{
+    background: orange;
+}
 
 .bg-primary{
     color: #fff !important;

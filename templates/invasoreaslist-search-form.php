@@ -357,5 +357,14 @@
         autocomplete(document.getElementById("species_genus"), species_genus);
         autocomplete(document.getElementById("auto_common"), common_names);
         autocomplete(document.getElementById("prot_areas"), ap_name);
+
+        document.querySelector('#myInput').addEventListener('keydown', function (e) {
+            if (13 == e.keyCode) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                document.getElementById("myBtn").click();
+            }
+        });
     </script>
 </div>

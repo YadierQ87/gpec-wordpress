@@ -1,5 +1,5 @@
 <div id="checklist-form-search" class="container checklist-form-search">
-    <h5 class="title"> <i class="fa fa-pagelines"></i> Registro de plantas introducidas e invasoras en Cuba </h5>
+    <h5 class="title"> <i class="fa fa-pagelines"></i> Lista Roja de la flora de Cuba </h5>
     <section >
         <!--TABLA: SynonymsGEPC
             TABLA: SpeciesGEPC

@@ -36,7 +36,12 @@ body{
     text-align: left !important;
 }
 .label-redlist{
-    background: orange;
+    background: #ff4949 !important;
+    color: #fff !important;
+}
+
+.no-margin{
+    margin: 0px !important;
 }
 
 .bg-primary{

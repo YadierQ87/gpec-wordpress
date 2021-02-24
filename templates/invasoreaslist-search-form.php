@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <input autocomplete="off"  type="text" id="myInput" name="myInput" class="input-search"
                        value="<?= $_POST['myInput'];?>"
-                       placeholder="Buscar por nombre de planta, autor, o publicaci&oacute;n"/>
+                       placeholder="Buscar por nombre cient&iacute;fico, nombre com&uacute;n &oacute; familia bot&aacute;nica"/>
                 <button class="btn-new-search" type="submit" id="buscar_general" name="buscar_general">
                     <i class="fa fa-search" ></i>
                 </button>
@@ -63,7 +63,8 @@
                     <div class="col-md-4">
                         <label for="">Plant growth form</label>
                         <?php $seleccion5 = $_POST['sel_species_grow_form']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_plant_growth_form","--Seleccione Plant --","sel_species_grow_form",$seleccion5); ?>
+                        <?= $obj->get_combo_data("gpec_species","species_plant_growth_form",
+                            "--Seleccione Plant --","sel_species_grow_form",$seleccion5); ?>
                     </div>
 
                     <div class="separator col-md-12">&nbsp;</div>
@@ -79,7 +80,8 @@
                     <div class="col-md-4">
                         <label for="">Is Invasive</label>
                         <?php $seleccion4 = $_POST['sel_is_invasive']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_is_invasive","--Seleccione Invasive --","sel_is_invasive",$seleccion4); ?>
+                        <?= $obj->get_combo_data("gpec_species","species_is_invasive",
+                            "--Seleccione Invasive --","sel_is_invasive",$seleccion4); ?>
                     </div>
 
                     <div class="separator col-md-12">&nbsp;</div>
@@ -120,23 +122,27 @@
                     <div class="col-md-4">
                         <label for=""> Uses Lookup </label>
                         <?php $seleccion3 = $_POST['sel_use_lookup']; ?>
-                        <?= $obj->get_combo_data("gpec_use","use_lookup","--Seleccione Uses Lookup --","sel_use_lookup",$seleccion3); ?>
+                        <?= $obj->get_combo_data("gpec_use","use_lookup",
+                            "--Seleccione Uses Lookup --","sel_use_lookup",$seleccion3); ?>
                     </div>
 
                     <div class="col-md-4">
                         <label for=""> Invasive entry route lookup </label>
                         <?php $seleccion2 = $_POST['sel_invasive_route']; ?>
-                        <?= $obj->get_combo_data("gpec_invasive_entry_route","invasive_entry_route ","--Seleccione Route --","sel_invasive_route",$seleccion2); ?>
+                        <?= $obj->get_combo_data("gpec_invasive_entry_route","invasive_entry_route ",
+                            "--Seleccione Route --","sel_invasive_route",$seleccion2); ?>
                     </div>
                     <div class="col-md-4">
                         <label for=""> Invasive Impact lookup </label>
                         <?php $seleccion6 = $_POST['sel_invasive_impact_lookup']; ?>
-                        <?= $obj->get_combo_data("gpec_invasive_impact","invasive_impact_lookup","--Seleccione Impact --","sel_invasive_impact_lookup",$seleccion6); ?>
+                        <?= $obj->get_combo_data("gpec_invasive_impact","invasive_impact_lookup",
+                            "--Seleccione Impact --","sel_invasive_impact_lookup",$seleccion6); ?>
                     </div>
                     <div class="col-md-4">
                         <label for="">Habitats lookup</label>
                         <?php $seleccion = $_POST['sel_habitat_lookup']; ?>
-                        <?= $obj->get_combo_data("gpec_habitats","habitats_lookup","--Seleccione Habitat --","sel_habitat_lookup",$seleccion); ?>
+                        <?= $obj->get_combo_data("gpec_habitats","habitats_lookup",
+                            "--Seleccione Habitat --","sel_habitat_lookup",$seleccion); ?>
                     </div>
                     <div class="col-md-4">
                         <label for="">protected areas GEPC</label>

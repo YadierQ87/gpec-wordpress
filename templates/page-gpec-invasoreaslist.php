@@ -37,7 +37,13 @@ get_header();
                                 <h3>Registro de plantas introducidas e invasoras en Cuba</h3>
 
                                 <label class="label label-default"> Hoja de Datos </label>
-                                <h4> <?= $gpec_species[0]->species_htmlname; ?> (<?= $common[0]->common_name; ?>)</h4>
+                                <h4> <?= $gpec_species[0]->species_htmlname; ?>
+                                    <?php
+                                        foreach ($common as $names) {
+                                            echo "<span>" . $names->common_name . "</span>";
+                                        }
+                                    ?>
+                                </h4>
                                 <h4> <?= $gpec_species[0]->species_family; ?> & <?= $gpec_species[0]->species_ordername; ?> & <?= $gpec_species[0]->species_division; ?></h4>
                                 <h4>
                                     <label class="label label-info">Datos de Taxonom&iacute;a y Nomenclatura</label>

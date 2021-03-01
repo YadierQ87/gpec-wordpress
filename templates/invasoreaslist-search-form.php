@@ -178,7 +178,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
             }
-            $addsql = " WHERE 1=1 ";
+            $addsql = " WHERE sp.species_origen != 'Nativa' ";
             //para paginado
             $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){
@@ -234,8 +234,7 @@
             $sql = "SELECT SQL_CALC_FOUND_ROWS
                         sp.id,sp.internal_taxon_id,sp.species_ordername,
                         sp.species_genus,sp.species_family,sp.species_classname,
-                        sp.species_htmlname,sp.species_plant_growth_form,
-                        sp.species_name,comn.common_name 
+                        sp.species_htmlname,sp.species_plant_growth_form
                     FROM
                         gpec_species AS sp
                         LEFT JOIN gpec_common_names AS comn ON comn.internal_taxon_id = sp.internal_taxon_id
@@ -246,7 +245,7 @@
                         LEFT JOIN gpec_habitats AS habitat ON habitat.internal_taxon_id = sp.internal_taxon_id
                         LEFT JOIN gpec_protected_areas areas ON areas.internal_taxon_id = sp.internal_taxon_id 
                     {$addsql} 
-                    GROUP BY sp.internal_taxon_id, sp.species_family,sp.species_genus, sp.species_name, comn.common_name
+                    GROUP BY sp.internal_taxon_id, sp.species_family,sp.species_genus,sp.species_name
                     ORDER BY sp.species_htmlname
                     LIMIT $limit 
                     OFFSET $offset";
@@ -255,7 +254,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <!--     < ?//= //var_dump($sql); ?> -->
+                <?php //echo var_dump($sql); ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -284,14 +283,17 @@
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
                             <td>
                                 <span>
+                                    <?php  $my_common_names = $obj->get_list_data_taxon("gpec_common_names",$query[$i]->internal_taxon_id);    ?>
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">
-                                        <?= $query[$i]->species_htmlname ?>
+                                        <?= $query[$i]->species_htmlname ?> (<?= $query[$i]->species_family; ?>)
                                     </a>
+                                    <br/>
+                                    <?php
+                                        foreach ($my_common_names as $names) {
+                                            echo "<span> " . $names->common_name . ", </span>";
+                                        }
+                                    ?>
                                 </span>
-                                <ul>
-                                    <li><?= $query[$i]->species_family; ?></li>
-                                    <li><?= $query[$i]->common_name; ?></li>
-                                </ul>
                             </td>
                         </tr>
                     <?php  } ?>

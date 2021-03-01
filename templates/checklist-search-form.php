@@ -79,32 +79,33 @@
                     <div class="separator col-md-12"> <label class="label label-info"> Sinonimos </label>  </div>
 
                     <div class="col-md-4">
-                        <label for="">SYn Genus</label>
+                        <label for="">Syn Genus</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_genus_form'];?>"
                                class="form-control" id="syn_genus_form"
-                               name="syn_genus_form" placeholder="Family"/>
+                               name="syn_genus_form" placeholder="syn Genus"/>
                     </div>
                     <div class="col-md-4">
                         <label for="">Syn Species </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_species_form'];?>"
                                class="form-control" id="syn_species_form"
-                               name="syn_species_form" placeholder="species order"/>
+                               name="syn_species_form" placeholder="syn species"/>
                     </div>
+                    <div class="separator col-md-12">  </div>
                     <div class="col-md-4">
                         <label for="">Syn Infra rank </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank_form'];?>"
                                class="form-control" id="syn_infra_rank_form"
-                               name="syn_infra_rank_form" placeholder="species class"/>
+                               name="syn_infra_rank_form" placeholder="syn infra rank"/>
                     </div>
                     <div class="col-md-4">
                         <label for="">Syn Infra rank2 </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank2_form'];?>"
                                class="form-control" id="syn_infra_rank2_form"
-                               name="syn_infra_rank2_form" placeholder="species class"/>
+                               name="syn_infra_rank2_form" placeholder="syn infra rank2"/>
                     </div>
 
                     <div class="separator col-md-12">   </div>
@@ -123,7 +124,8 @@
                     <div class="col-md-4">
                         <label for=""> Species Origen </label>
                         <?php $seleccion7 = $_POST['sel_species_origen']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_origen","--Seleccione Origen --","sel_species_origen",$seleccion7); ?>
+                        <?= $obj->get_combo_data("gpec_species","species_origen",
+                            "-- Seleccione --","sel_species_origen",$seleccion7); ?>
                     </div>
                     <div class="col-md-4">
                         <label for=""> Species Presence(?)  </label>
@@ -137,22 +139,18 @@
                     <div class="col-md-4">
                         <label for="">Plant growth form</label>
                         <?php $seleccion5 = $_POST['sel_species_grow_form']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_plant_growth_form","--Seleccione Plant --","sel_species_grow_form",$seleccion5); ?>
+                        <?= $obj->get_combo_data("gpec_species","species_plant_growth_form","-- Seleccione --","sel_species_grow_form",$seleccion5); ?>
                     </div>
                     <div class="col-md-4">
                         <label for="">Habitats lookup</label>
                         <?php $seleccion = $_POST['sel_habitat_lookup']; ?>
-                        <?= $obj->get_combo_data("gpec_habitats","habitats_lookup","--Seleccione Habitat --","sel_habitat_lookup",$seleccion); ?>
+                        <?= $obj->get_combo_data("gpec_habitats","habitats_lookup","-- Seleccione --","sel_habitat_lookup",$seleccion); ?>
                     </div>
                     <div class="col-md-4">
                         <label for=""> Uses Lookup </label>
                         <?php $seleccion3 = $_POST['sel_use_lookup']; ?>
-                        <?= $obj->get_combo_data("gpec_use","use_lookup","--Seleccione Uses Lookup --","sel_use_lookup",$seleccion3); ?>
+                        <?= $obj->get_combo_data("gpec_use","use_lookup","-- Seleccione --","sel_use_lookup",$seleccion3); ?>
                     </div>
-
-
-
-
 
                     <div class="col-md-6">
                         <label for="">Acciones</label><br/>
@@ -165,20 +163,22 @@
             if (!empty($_REQUEST)) {
                 $singular_name = $_REQUEST["myInput"];//el campo de busqueda global
                 //los demas campos POST x Orden
-                $species_family = $_REQUEST["species_family"];
-                $common_names = $_REQUEST["auto_common"];
                 $species_genus = $_REQUEST["species_genus"];
-                $impact_lookup = $_REQUEST["sel_invasive_impact_lookup"];
-                $species_grow_form = $_REQUEST["sel_species_grow_form"];
-                $sel_is_invasive = $_REQUEST["sel_is_invasive"];
-                $sel_species_origen = $_REQUEST["sel_species_origen"];#new todo put in filter
-                $radio_isweed = $_REQUEST["isweed"];
-                $radio_istransformer = $_REQUEST["istransformer"];
-                $radio_effectunknown = $_REQUEST["effectunknown"];
-                $sel_use_lookup = $_REQUEST["sel_use_lookup"];
-                $sel_invasive_route = $_REQUEST["sel_invasive_route"];
+                $species_name = $_REQUEST["species_name_form"];
+                $species_infra_name = $_REQUEST["species_infra_name_form"];
+                $species_family = $_REQUEST["species_family"];
+                $species_order = $_REQUEST["species_order_form"];
+                $species_class = $_REQUEST["species_class_form"];
+                $syn_genus = $_REQUEST["syn_genus_form"];
+                $syn_species = $_REQUEST["syn_species_form"];
+                $syn_infra_rank = $_REQUEST["syn_infra_rank_form"];
+                $syn_infra_rank2 = $_REQUEST["syn_infra_rank2_form"];
+                $isendemism = $_REQUEST["isendemism"];
+                $sel_species_origen = $_REQUEST["sel_species_origen"];
+                $sel_species_presence = $_REQUEST["sel_species_presence"];
+                $sel_species_grow_form = $_REQUEST["sel_species_grow_form"];
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
-                $protected_areas = $_REQUEST["prot_areas"];
+                $sel_use_lookup = $_REQUEST["sel_use_lookup"];
             }
             $addsql = " WHERE 1=1 ";
             //para paginado
@@ -192,6 +192,7 @@
             if ($singular_name != "") {//singular_name puede ser
                 $addsql .= " AND ( sp.species_genus LIKE '%{$singular_name}%' 
                     OR sp.species_name LIKE '%{$singular_name}%' 
+                    OR sp.species_family LIKE '%{$singular_name}%' 
                     OR sp.species_infra_rank_name LIKE '%{$singular_name}%' 
                     OR syns.synonyms_genus LIKE '%{$singular_name}%' 
                     OR syns.synonyms_species_name LIKE '%{$singular_name}%' 
@@ -199,30 +200,38 @@
                     OR syns.synonyms_infra_rank2_name LIKE '%{$singular_name}%') ";
             }
             //cuando el filtro es busqueda avanzada
-            if ($species_family != "")
-                $addsql .= " AND sp.species_family LIKE '%{$species_family}%' ";
-            if ($common_names != "")
-                $addsql .= " AND comn.common_name LIKE '%{$common_names}%' ";
             if ($species_genus != "")
                 $addsql .= " AND sp.species_genus LIKE '%{$species_genus}%' ";
-            if ($species_grow_form != "--Seleccione Plant --" and $species_grow_form != "")
-                $addsql .= " AND sp.species_plant_growth_form = '{$species_grow_form}' ";
-            if ($sel_is_invasive != "--Seleccione Invasive --" and $sel_is_invasive != "")
-                $addsql .= " AND sp.species_is_invasive = '{$sel_is_invasive}' ";
-            if ($radio_isweed != "No")
-                $addsql .= " AND sp.species_is_aweed LIKE '%{$radio_isweed}%' ";
-            if ($radio_istransformer != "No")
-                $addsql .= " AND sp.species_is_atransformer LIKE '%{$radio_istransformer}%' ";
-            if ($radio_effectunknown != "No")
-                $addsql .= " AND sp.species_is_itseffectunknown LIKE '%{$radio_effectunknown}%' ";
-            if ($sel_use_lookup != "--Seleccione Uses Lookup --" and $sel_use_lookup != "")
+            if ($species_name != "")
+                $addsql .= " AND sp.species_name LIKE '%{$species_name}%' ";
+            if ($species_infra_name != "")
+                $addsql .= " AND sp.species_infra_rank_name LIKE '%{$species_infra_name}%' ";
+            if ($species_family != "")
+                $addsql .= " AND sp.species_family LIKE '%{$species_family}%' ";
+            if ($species_order != "")
+                $addsql .= " AND sp.species_ordername LIKE '%{$species_order}%' ";
+            if ($species_class != "")
+                $addsql .= " AND sp.species_classname LIKE '%{$species_class}%' ";
+            if ($syn_genus != "")
+                $addsql .= " AND syns.synonyms_genus LIKE '%{$syn_genus}%' ";
+            if ($syn_species != "")
+                $addsql .= " AND syns.synonyms_species_name LIKE '%{$syn_species}%' ";
+            if ($syn_infra_rank != "")
+                $addsql .= " AND syns.synonyms_infra_rank_name LIKE '%{$syn_infra_rank}%' ";
+            if ($syn_infra_rank2 != "")
+                $addsql .= " AND syns.synonyms_infra_rank2_name LIKE '%{$syn_infra_rank2}%' ";
+            if ($sel_species_origen != "-- Seleccione --" and $sel_species_origen != "")
+                $addsql .= " AND sp.species_origen = '{$sel_species_origen}' ";
+            if ($sel_species_presence != "-- Seleccione --" and $sel_species_presence != "")
+                $addsql .= " AND sp.species_presence = '{$sel_species_presence}' ";
+            if ($sel_species_grow_form != "-- Seleccione --" and $sel_species_grow_form != "")
+                $addsql .= " AND sp.species_plant_growth_form = '{$sel_species_grow_form}' ";
+            //if ($isendemism != "No") TODO cuando este el campo endemism -bool
+                //$addsql .= " AND sp.species_is_aweed LIKE '%{$isendemism}%' ";
+            if ($sel_use_lookup != "-- Seleccione --" and $sel_use_lookup != "")
                 $addsql .= " AND gpec_use.use_lookup = '{$sel_use_lookup}' ";
-            if ($sel_invasive_route != "--Seleccione Route --" and $sel_invasive_route != "")
-                $addsql .= " AND route.invasive_entry_route = '{$sel_invasive_route}' ";
-            if ($sel_habitat_lookup != "--Seleccione Habitat --" and $sel_habitat_lookup != "")
+            if ($sel_habitat_lookup != "-- Seleccione --" and $sel_habitat_lookup != "")
                 $addsql .= " AND habitat.habitats_lookup = '{$sel_habitat_lookup}' ";
-            if ($impact_lookup != "--Seleccione Impact --" and $impact_lookup != "")
-                $addsql .= " AND impact.invasive_impact_lookup = '{$impact_lookup}' ";
             //query sql optimizadas
             $sql = "SELECT SQL_CALC_FOUND_ROWS
                         sp.id,sp.internal_taxon_id,sp.species_htmlname, syns.synonyms_htmlname 
@@ -241,7 +250,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <?php  echo var_dump($sql); ?>
+            <?php  //echo var_dump($sql); ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -270,7 +279,7 @@
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
                             <td>
                                 <span>
-                                    <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">
+                                    <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-checklist/?id={$query[$i]->id}" ?>">
                                         <?= $query[$i]->species_htmlname ?>
                                     </a>
                                 </span>
@@ -341,12 +350,13 @@
         var syn_infra_rank2_name = [ '<?php echo implode("','",$syn_infra_rank2_name);?>' ];
 
         //Concatenado en un arreglo grande
-        var global_species =  species_name.concat(species_genus).concat(species_infra_rank_name);
+        var global_species =  species_name.concat(species_genus).concat(species_infra_rank_name).concat(species_family);
         var global_syns =  synonyms_species_name.concat(syn_genus).concat(syn_infra_rank_name).concat(syn_infra_rank2_name);
 
         autocomplete(document.getElementById("myInput"), global_species.concat(global_syns));/* el global de todos */
         autocomplete(document.getElementById("species_family"), species_family);
         autocomplete(document.getElementById("species_genus"), species_genus);
+        autocomplete(document.getElementById("species_name_form"), species_name);
         autocomplete(document.getElementById("species_order_form"), species_order);
         autocomplete(document.getElementById("species_class_form"), species_class);
         autocomplete(document.getElementById("species_infra_name_form"), species_infra_rank_name);

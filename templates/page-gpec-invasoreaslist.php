@@ -64,10 +64,10 @@ get_header();
                                 </h4>
                                 <h4>
                                     <?php if (count($synonyms )>0){ ?>
-                                    <label class="label label-info">Datos de Taxonom&iacute;a y Nomenclatura</label>
-                                    <?php foreach ($synonyms as $syn){
-                                        echo "<p>".$syn->synonyms_htmlname."</p>";
-                                    } }?>
+                                        <label class="label label-info">Datos de Taxonom&iacute;a y Nomenclatura</label>
+                                        <?php foreach ($synonyms as $syn){
+                                            echo "<p>".$syn->synonyms_htmlname."</p>";
+                                        } }?>
                                 </h4>
                                 <div class="">
                                     <label class="label label-info">Origen e Invasibilidad</label>
@@ -95,89 +95,111 @@ get_header();
                                     <?php if ($gpec_species[0]->species_origen_notes != ""){
                                         echo "<p> Label species_origen_notes ".$gpec_species[0]->species_origen_notes."</p>";
                                     }?>
-
-                                    <p><label class="label label-info">Justificación de invasivibilidad en Cuba</label>
-                                        <?php echo "species_invasive_rationale no esta?" ?></p>
-
-                                    <label class="label label-info">Tipo de Planta</label>
-                                    <p> <?php echo $gpec_species[0]->species_plant_growth_form; ?></p>
-
-                                    <p><label class="label label-info">Ruta de entrada y proliferación</label>
-                                    <ul>
-                                        <?php foreach ($invasive_route as $invasive){
+                                    <p>
+                                        <label class="label label-info">Justificación de invasivibilidad en Cuba</label>
+                                        <?php echo "species_invasive_rationale no esta?" ?>
+                                    </p>
+                                    <?php if ($gpec_species[0]->species_plant_growth_form != ""){
+                                        echo "<label class=\"label label-info\">Tipo de Planta</label>";
+                                        echo "<p> Label species_origen_notes ".$gpec_species[0]->species_plant_growth_form."</p>";
+                                    }?>
+                                    <?php if (count($invasive_route)>0){
+                                        echo "<label class=\"label label-info\">Ruta de entrada y proliferación</label>";
+                                        echo "<ul>";
+                                        foreach ($invasive_route as $invasive){
                                             echo "<li>".$invasive->invasive_entry_route."</li>";
-                                        }?>
-                                    </ul>
-                                    </p>
-                                    <p><label class="label label-info">Tipo de impacto registrado</label></p>
-                                    <p>species_is_itseffectunknown <?php echo $gpec_species[0]->species_is_itseffectunknown; ?>
-                                    <ul><li>invasive_impact_lookup</li>
-                                        <?php
-                                        foreach ($invasive_impact as $impact){
-                                            echo "<li>". $impact->invasive_impact_lookup."</li>";
                                         }
-                                        ?>
-                                    </ul>
+                                        echo "</ul>";
+                                    }?>
+
+                                    <p><label class="label label-info">Tipo de impacto registrado</label></p>
+                                    <?php if ($gpec_species[0]->species_is_itseffectunknown != ""){
+                                        echo "<p>Label species_is_itseffectunknown ".$gpec_species[0]->species_is_itseffectunknown."</p>";
+                                    }?>
+                                    <p>
+                                        <?php if (count($invasive_impact)>0) { ?>
+                                            <ul>
+                                                <li>invasive_impact_lookup</li>
+                                                <?php
+                                                foreach ($invasive_impact as $impact){
+                                                    echo "<li>". $impact->invasive_impact_lookup."</li>";
+                                                }
+                                                ?>
+                                            </ul>
+                                        <?php } ?>
                                     </p>
 
-                                    <p><label class="label label-info">Sumario</label>
-                                        <?php echo "species_invasive_narrative no esta?" ?> </p>
-
-
-                                    <p><label class="label label-info">Tipos de hábitats usados por este taxón</label>
-                                    <ul>
-                                        <?php foreach ($habitat as $hab){
-                                            echo "<li>". $hab->habitats_lookup."</li>";
-                                        }?>
-                                    </ul>
+                                    <p>
+                                        <label class="label label-info">Sumario</label>
+                                        <?php echo "species_invasive_narrative no esta?" ?>
                                     </p>
 
+                                    <?php if (count($habitat)>0) { ?>
+                                        <p>
+                                            <label class="label label-info">Tipos de hábitats usados por este taxón</label>
+                                            <ul>
+                                                <?php foreach ($habitat as $hab){
+                                                    echo "<li>". $hab->habitats_lookup."</li>";
+                                                }?>
+                                            </ul>
+                                        </p>
+                                    <?php } ?>
 
-                                    <p><label class="label label-info">Áreas protegidas</label>
-                                    <ul>
-                                        <?php foreach ($protected as $prot){
-                                            echo "<li>".$prot->ap_name."</li>";
-                                        }?>
-                                    </ul>
-                                    </p>
-
-                                    <p><label class="label label-info">Usos del taxón en Cuba</label>
-                                    <ul>
-                                        <?php foreach ($use_lookup as $uses){
-                                            echo "<li>". $uses->use_lookup."</li>";
-                                        }?>
-                                    </ul>
-
-                                    <div>
-                                        <label class="label label-info"> Referencias </label>
-                                        <br/>
+                                    <?php if (count($protected)>0) { ?>
+                                        <p><label class="label label-info">Áreas protegidas</label>
                                         <ul>
-                                            <?php foreach ($references as $ref){
-                                                echo "<span>".$ref->species_referencias_general."</span>";
+                                            <?php foreach ($protected as $prot){
+                                                echo "<li>".$prot->ap_name."</li>";
                                             }?>
                                         </ul>
-                                    </div>
+                                        </p>
+                                    <?php } ?>
 
-                                    <p><label class="label label-info">Citación recomendada</label>
-                                        <?php foreach ($assessments as $asset){
-                                            echo "<blockquote>". $asset->summary_recommended_citation."</blockquote>";
-                                        }?>
-                                    </p>
-                                    <div class="box-for-maps" style="margin-top: 50px;">
-                                        <strong>Distribuci&oacute;n</strong>
-                                        <?php
-                                        echo do_shortcode('[leaflet-map height=350 width=100% zoomcontrol=1 scrollwheel=1 fitbounds]');
-                                        foreach ($locations as $location)
-                                        {
-                                            $munic = $location->location_municipality;
-                                            $prov = $location->location_province;
-                                            $loc_name = $location->location_name;
-                                            $lat = $location->location_latitude;
-                                            $long = $location->location_longitud;
-                                            echo do_shortcode("[leaflet-marker address='{$munic}, {$prov}' lat={$lat} lng={$long} zoom=5]{$loc_name}[/leaflet-marker]" );
-                                        }
-                                        ?>
-                                    </div>
+                                    <?php if (count($use_lookup)>0) { ?>
+                                        <p><label class="label label-info">Usos del taxón en Cuba</label>
+                                        <ul>
+                                            <?php foreach ($use_lookup as $uses){
+                                                echo "<li>". $uses->use_lookup."</li>";
+                                            }?>
+                                        </ul>
+                                        </p>
+                                    <?php } ?>
+
+                                    <?php if (count($references)>0) { ?>
+                                        <div>
+                                            <label class="label label-info"> Referencias </label>
+                                            <br/>
+                                            <ul>
+                                                <?php foreach ($references as $ref){
+                                                    echo "<span>".$ref->species_referencias_general."</span>";
+                                                }?>
+                                            </ul>
+                                        </div>
+                                    <?php } ?>
+                                    <?php if (count($assessments)>0) { ?>
+                                        <p><label class="label label-info">Citación recomendada</label>
+                                            <?php foreach ($assessments as $asset){
+                                                echo "<blockquote>". $asset->summary_recommended_citation."</blockquote>";
+                                            }?>
+                                        </p>
+                                    <?php } ?>
+                                    <?php if (count($locations)>0) { ?>
+                                        <div class="box-for-maps" style="margin-top: 50px;">
+                                            <strong>Distribuci&oacute;n</strong>
+                                            <?php
+                                            echo do_shortcode('[leaflet-map height=350 width=100% zoomcontrol=1 scrollwheel=1 fitbounds]');
+                                            foreach ($locations as $location)
+                                            {
+                                                $munic = $location->location_municipality;
+                                                $prov = $location->location_province;
+                                                $loc_name = $location->location_name;
+                                                $lat = $location->location_latitude;
+                                                $long = $location->location_longitud;
+                                                echo do_shortcode("[leaflet-marker address='{$munic}, {$prov}' lat={$lat} lng={$long} zoom=5]{$loc_name}[/leaflet-marker]" );
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </section>

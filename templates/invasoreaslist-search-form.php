@@ -153,7 +153,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="">Acciones</label><br/>
-                        <button type="reset" class="btn btn-danger">Limpiar Filtros</button>
+                        <button type="reset" id="reset_post" name="reset_post" class="btn btn-danger">Limpiar Filtros</button>
                         <button type="submit" class="btn btn-primary">Solicitar B&uacute;squeda</button>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
             if (isset($_REQUEST["buscar_general"])){
                 $numero_pagina = 1;
             }
-            $limit = 10;
+            $limit = $_POST['limit'];
             $offset = ($numero_pagina-1) * $limit;
             //preguntas para conformar el sql solo en la table gpec_species
             if ($singular_name != "") {//singular_name puede ser
@@ -254,7 +254,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-                <?php //echo var_dump($sql); ?>
+                <?php echo var_dump($sql); ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -264,24 +264,34 @@
                 </span>
             <?php else: ?>
             </br>
-            <div class="panel" style="padding: 20px">
+            <div class="panel" >
                 <table class="table table-bordered table-hover" style="margin-top: 40px;">
                     <tbody>
                     <tr>
                         <th colspan="2">
                             <p>P&aacute;gina
-                                <span class="badge bg-primary"><?= $numero_pagina ?></span>
-                                de <span class="badge bg-primary"><?= $totalPag ?></span>
-                                Mostrando <span class="badge bg-primary"><?= $maximo ?></span>
-                                resultado(s) de <span class="badge bg-primary"><?= $rsTotal[0]->total; ?></span>
+                                <span class="badge"><?= $numero_pagina ?></span>
+                                de <span class="badge"><?= $totalPag ?></span>
+                                Mostrando <span class="badge"><?= $maximo ?></span>
+                                resultado(s) de <span class="badge"><?= $rsTotal[0]->total; ?></span>
                             </p>
+                        </th>
+                        <th>
+                            <select id="limit" name="limit">
+                                <?php // TODO $_POST['limit'] ?>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
                         </th>
                     </tr>
                     <?php
                     for($i=0; $i< $maximo ;$i++){ ?>
                         <tr>
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
-                            <td>
+                            <td >
                                 <span>
                                     <?php  $my_common_names = $obj->get_list_data_taxon("gpec_common_names",$query[$i]->internal_taxon_id);    ?>
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">

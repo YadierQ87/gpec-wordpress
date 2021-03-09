@@ -283,7 +283,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <?php //echo var_dump($sql); ?>
+            <?php echo var_dump($sql); ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -293,17 +293,27 @@
                 </span>
             <?php else: ?>
             </br>
-            <div class="panel" style="padding: 20px">
+            <div class="panel" >
                 <table class="table table-bordered table-hover" style="margin-top: 40px;">
                     <tbody>
                     <tr>
                         <th colspan="2">
                             <p>P&aacute;gina
-                                <span class="badge bg-primary"><?= $numero_pagina ?></span>
-                                de <span class="badge bg-primary"><?= $totalPag ?></span>
-                                Mostrando <span class="badge bg-primary"><?= $maximo ?></span>
-                                resultado(s) de <span class="badge bg-primary"><?= $rsTotal[0]->total; ?></span>
+                                <span class="badge"><?= $numero_pagina ?></span>
+                                de <span class="badge"><?= $totalPag ?></span>
+                                Mostrando <span class="badge"><?= $maximo ?></span>
+                                resultado(s) de <span class="badge"><?= $rsTotal[0]->total; ?></span>
                             </p>
+                        </th>
+                        <th>
+                            <select id="limit" name="limit">
+                                <?php // TODO $_POST['limit'] ?>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
                         </th>
                     </tr>
                     <?php

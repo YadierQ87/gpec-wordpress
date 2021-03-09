@@ -6,14 +6,34 @@ jQuery(function($) {
       $("#spin-search").addClass('fa-caret-right');
       $("#advance-fields").removeClass('my-hidden');
       $("#advance-fields").addClass('my-display');
+      $("#myInput").value = "";
+      $("#myInput").attrs("readonly",false);
+      $("#myInput").attrs("disabled",false);
+      $("#myInput").setAttribute("disabled",true);
     }
     else if ($("#spin-search").hasClass('fa-caret-right')){
       $("#spin-search").removeClass('fa-caret-right');
       $("#spin-search").addClass('fa-caret-down');
       $("#advance-fields").removeClass('my-display');
       $("#advance-fields").addClass('my-hidden');
+      $("#myInput").value = "";
+      $("#myInput").setAttribute("readonly",false);
+      $("#myInput").setAttribute("disabled",false);
     }
   });
+
+  //el select con el limite para listado
+  $("#limit").change(function () {
+    alert(this.value);
+    $('form').submit();
+  });
+
+  //resetear los filtros
+  $("#reset_post").click(function () {
+    //todo limpiar las variables POST
+    //limpiar todas las variables
+  });
+
 });
 
 

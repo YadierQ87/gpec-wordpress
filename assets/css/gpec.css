@@ -19,11 +19,21 @@ body{
 .box-advance,.btn-new-search{
     background: #345975;    padding: 8px;    cursor: pointer;    color: #fff;    border: solid 1px #eee;
 }
+.class-input-search{
+    background-color: #f1f1f1;
+    height: 44px;
+    border-radius: 0 !important;
+}
 .btn-new-search{
-    width: 8%;    float: left; height: 45.2px;
+    width: 8%;    float: left;
+    height: 45px !important;
+    border-radius:0 !important;
+    background-color:#345975 !important;
+    color: #fff !important;
 }
 .box-advance{
     width: 20%;    float: left;    text-align: center;
+    height: 45px !important;
 }
 .advance-fields {
     margin-top: 15px;
@@ -56,9 +66,6 @@ body{
 
 .checklist-form-search{
     color: #345975;
-    border: solid 1px #e3e9ee;
-    border-radius: 4px;
-    padding: 25px 10px 25px 0;
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: left;
@@ -94,15 +101,16 @@ input[type=submit] {
     border-top: none;
     z-index: 99;
     /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
+    margin-top: 45px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 720px;
 }
 .autocomplete-items div {
-    padding: 10px;
+    padding: 5px !important;
     cursor: pointer;
     background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4 !important;
 }
 .autocomplete-items div:hover {
     /*when hovering an item:*/

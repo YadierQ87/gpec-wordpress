@@ -6,7 +6,7 @@ jQuery(function($) {
       $("#spin-search").addClass('fa-caret-right');
       $("#advance-fields").removeClass('my-hidden');
       $("#advance-fields").addClass('my-display');
-      $("#myInput").value = "";
+      $("#myInput").val("")
       $("#myInput").attrs("readonly",false);
       $("#myInput").attrs("disabled",false);
       $("#myInput").setAttribute("disabled",true);
@@ -16,15 +16,32 @@ jQuery(function($) {
       $("#spin-search").addClass('fa-caret-down');
       $("#advance-fields").removeClass('my-display');
       $("#advance-fields").addClass('my-hidden');
-      $("#myInput").value = "";
+      $("#myInput").val("")
       $("#myInput").setAttribute("readonly",false);
       $("#myInput").setAttribute("disabled",false);
     }
   });
 
+  //los botones del paginado
+  $("#first").click(function () {
+    $("#pag").val(this.value)
+    $('form').submit();
+  });
+  $("#prev").click(function () {
+    $("#pag").val(this.value)
+    $('form').submit();
+  });
+  $("#next").click(function () {
+    $("#pag").val(this.value)
+    $('form').submit();
+  });
+  $("#last").click(function () {
+    $("#pag").val(this.value)
+    $('form').submit();
+  });
+
   //el select con el limite para listado
   $("#limit").change(function () {
-    alert(this.value);
     $('form').submit();
   });
 

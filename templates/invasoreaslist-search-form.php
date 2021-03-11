@@ -178,7 +178,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
             }
-            $addsql = " WHERE sp.species_origen != 'Nativa' ";
+            $addsql = " WHERE sp.species_origin != 'Nativa' ";
             //para paginado
             $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){
@@ -199,6 +199,7 @@
                     OR comn.common_name LIKE '%{$singular_name}%') ";
             }
             //cuando el filtro es busqueda avanzada
+            $leftjoin = "";
             if ($species_family != "")
                 $addsql .= " AND sp.species_family LIKE '%{$species_family}%' ";
             if ($species_name_form != "")
@@ -218,18 +219,30 @@
             if ($radio_effectunknown != "No")
                 $addsql .= " AND sp.species_is_itseffectunknown LIKE '%{$radio_effectunknown}%' ";
             if ($sel_use_lookup != "--Seleccione Uses Lookup --" and $sel_use_lookup != "")
+            {
+                $leftjoin .= " LEFT JOIN gpec_use ON gpec_use.internal_taxon_id = sp.internal_taxon_id ";
                 $addsql .= " AND gpec_use.use_lookup = '{$sel_use_lookup}' ";
+            }
             if ($sel_invasive_route != "--Seleccione Route --" and $sel_invasive_route != "")
+            {
+                $leftjoin .= "  LEFT JOIN gpec_invasive_entry_route AS route ON route.internal_taxon_id = sp.internal_taxon_id ";
                 $addsql .= " AND route.invasive_entry_route = '{$sel_invasive_route}' ";
+            }
             if ($sel_habitat_lookup != "--Seleccione Habitat --" and $sel_habitat_lookup != "")
+            {
+                $leftjoin .= "LEFT JOIN gpec_habitats AS habitat ON habitat.internal_taxon_id = sp.internal_taxon_id ";
                 $addsql .= " AND habitat.habitats_lookup = '{$sel_habitat_lookup}' ";
+            }
             if ($impact_lookup != "--Seleccione Impact --" and $impact_lookup != "")
+            {
+                $leftjoin = " LEFT JOIN gpec_invasive_impact AS impact ON impact.internal_taxon_id = sp.internal_taxon_id ";
                 $addsql .= " AND impact.invasive_impact_lookup = '{$impact_lookup}' ";
+            }
             if ($protected_areas!= "")
+            {
+                $leftjoin = " LEFT JOIN gpec_protected_areas areas ON areas.internal_taxon_id = sp.internal_taxon_id ";
                 $addsql .= " AND areas.ap_name LIKE '%{$protected_areas}%' ";
-            //TODO cuando este completa la bd Siempre filtrar x Species Origen = Introducida or Criptogenica
-            //if ($origen != "")
-                //$addsql .= " AND (sp.species_origin = 'Introducida' OR  sp.species_origin = 'Criptogenica') ";
+            }
             //query sql optimizadas
             $sql = "SELECT SQL_CALC_FOUND_ROWS
                         sp.id,sp.internal_taxon_id,sp.species_ordername,
@@ -238,12 +251,8 @@
                     FROM
                         gpec_species AS sp
                         LEFT JOIN gpec_common_names AS comn ON comn.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_use ON gpec_use.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_invasive_entry_route AS route ON route.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_invasive_impact AS impact ON impact.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_habitats AS habitat ON habitat.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_protected_areas areas ON areas.internal_taxon_id = sp.internal_taxon_id 
+                        LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id 
+                        {$leftjoin} 
                     {$addsql} 
                     GROUP BY sp.internal_taxon_id, sp.species_family,sp.species_genus,sp.species_name
                     ORDER BY sp.species_htmlname
@@ -278,12 +287,11 @@
                         </th>
                         <th>
                             <select id="limit" name="limit">
-                                <?php // TODO $_POST['limit'] ?>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
+                                <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
+                                <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
+                                <option value="30" <?php if($_POST['limit']==30) echo "selected='selected'" ?>>30</option>
+                                <option value="50" <?php if($_POST['limit']==50) echo "selected='selected'" ?>>50</option>
+                                <option value="100" <?php if($_POST['limit']==100) echo "selected='selected'" ?>>100</option>
                             </select>
                         </th>
                     </tr>
@@ -312,13 +320,17 @@
                     <tr>
                         <td colspan="2">
                             <?php
-                            $html_paginate = "<nav aria-label='navigation '><ul class=\"pagination\">";
-                            for( $i=1; $i<=$totalPag ; $i++) {
-                                $html_paginate .= "<li class=\"page-item\">
-                                    <button type='submit' class=\"page-link\" name='pag' id='pag' value='$i'>$i</button></li>";
-                            }
+                            //El paginado
+                            $next = (int)($numero_pagina) + 1 < $totalPag ? (int)($numero_pagina) + 1 : $totalPag;
+                            $prev = (int)($numero_pagina) - 1 > 1 ? (int)($numero_pagina) - 1 : 1;
+                            $html_paginate = "<nav aria-label='navigation '>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='first' id='first' value='1'>First</button>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='prev' id='prev' value='$prev'>Prev</button>";
+                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$_REQUEST['pag']}'>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='next' id='next' value='$next'>Next</button>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='last' id='last' value='$totalPag'>Last</button>";
                             if ($totalPag > 1){
-                                echo $html_paginate."</ul></nav>";
+                                echo $html_paginate."</nav>";
                             }
                             ?>
                         </td>

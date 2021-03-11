@@ -180,13 +180,14 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $sel_use_lookup = $_REQUEST["sel_use_lookup"];
             }
+            $lefjoin = " ";
             $addsql = " WHERE 1=1 ";
             //para paginado
             $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){
                 $numero_pagina = 1;
             }
-            $limit = 10;
+            $limit = $_POST['limit'];
             $offset = ($numero_pagina-1) * $limit;
             //preguntas para conformar el sql solo en la table gpec_species
             if ($singular_name != "") {//singular_name puede ser
@@ -229,17 +230,22 @@
             //if ($isendemism != "No") TODO cuando este el campo endemism -bool
                 //$addsql .= " AND sp.species_is_aweed LIKE '%{$isendemism}%' ";
             if ($sel_use_lookup != "-- Seleccione --" and $sel_use_lookup != "")
+            {
                 $addsql .= " AND gpec_use.use_lookup = '{$sel_use_lookup}' ";
+                $lefjoin .= " LEFT JOIN gpec_use ON gpec_use.internal_taxon_id = sp.internal_taxon_id ";
+            }
             if ($sel_habitat_lookup != "-- Seleccione --" and $sel_habitat_lookup != "")
+            {
                 $addsql .= " AND habitat.habitats_lookup = '{$sel_habitat_lookup}' ";
+                $lefjoin .= " LEFT JOIN gpec_habitats AS habitat ON habitat.internal_taxon_id = sp.internal_taxon_id ";
+            }
             //query sql optimizadas
             $sql = "SELECT SQL_CALC_FOUND_ROWS
                         sp.id,sp.internal_taxon_id,sp.species_htmlname, syns.synonyms_htmlname 
                     FROM
                         gpec_species AS sp                       
                         LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_use ON gpec_use.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_habitats AS habitat ON habitat.internal_taxon_id = sp.internal_taxon_id                       
+                        {$lefjoin}                                                 
                     {$addsql} 
                     GROUP BY sp.internal_taxon_id
                     ORDER BY sp.species_htmlname
@@ -274,12 +280,11 @@
                         </th>
                         <th>
                             <select id="limit" name="limit">
-                                <?php // TODO $_POST['limit'] ?>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
+                                <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
+                                <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
+                                <option value="30" <?php if($_POST['limit']==30) echo "selected='selected'" ?>>30</option>
+                                <option value="50" <?php if($_POST['limit']==50) echo "selected='selected'" ?>>50</option>
+                                <option value="100" <?php if($_POST['limit']==100) echo "selected='selected'" ?>>100</option>
                             </select>
                         </th>
                     </tr>
@@ -293,13 +298,13 @@
                                         <?= $query[$i]->species_htmlname ?>
                                     </a>
                                 </span>
-                                <ul style="list-style: none">
-                                    <?php #TODO ciclo para mostrar las demas sinonimias //?>
-<!--                                    --><?php //foreach ($invasive_route as $invasive){
-//                                        echo "<li>".$invasive->invasive_entry_route."</li>";
-//                                    }?>
-                                    <li><?= $query[$i]->synonyms_htmlname; ?></li>
-                                </ul>
+                                <div>
+                                    <?php
+                                    $synonyms = $obj->get_list_data_taxon("gpec_synonyms",$query[$i]->internal_taxon_id);
+                                    foreach ($synonyms as $syns){
+                                        echo "<span>".$syns->synonyms_htmlname." ,</span>";
+                                    }?>
+                                </div>
                             </td>
                         </tr>
                     <?php  } ?>
@@ -308,13 +313,17 @@
                     <tr>
                         <td colspan="2">
                             <?php
-                            $html_paginate = "<nav aria-label='navigation '><ul class=\"pagination\">";
-                            for( $i=1; $i<=$totalPag ; $i++) {
-                                $html_paginate .= "<li class=\"page-item\">
-                                    <button type='submit' class=\"page-link\" name='pag' id='pag' value='$i'>$i</button></li>";
-                            }
+                            //El paginado
+                            $next = (int)($numero_pagina) + 1 < $totalPag ? (int)($numero_pagina) + 1 : $totalPag;
+                            $prev = (int)($numero_pagina) - 1 > 1 ? (int)($numero_pagina) - 1 : 1;
+                            $html_paginate = "<nav aria-label='navigation '>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='first' id='first' value='1'>First</button>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='prev' id='prev' value='$prev'>Prev</button>";
+                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$_REQUEST['pag']}'>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='next' id='next' value='$next'>Next</button>";
+                            $html_paginate .= "<button type='button' class=\"page-link\" name='last' id='last' value='$totalPag'>Last</button>";
                             if ($totalPag > 1){
-                                echo $html_paginate."</ul></nav>";
+                                echo $html_paginate."</nav>";
                             }
                             ?>
                         </td>

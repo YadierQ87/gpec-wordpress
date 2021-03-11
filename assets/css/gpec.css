@@ -121,3 +121,12 @@ input[type=submit] {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+.pagination-input{
+    height: 30px !important; width: 45px !important;
+    background: #fff;
+    text-align: center;
+    color: #444;
+}
+.page-link{
+     margin: 3px;
+}

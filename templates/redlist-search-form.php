@@ -295,7 +295,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <?php echo var_dump($sql);  ?>
+            <?php //echo var_dump($sql);  ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);

@@ -37,13 +37,18 @@ get_header();
                                 <h3>Registro de plantas introducidas e invasoras en Cuba</h3>
 
                                 <label class="label label-default"> Hoja de Datos </label>
-                                <h4> <?php echo $gpec_species[0]->species_htmlname; ?>
-                                    <?php
-                                    if (count($common) > 0){
-                                        foreach ($common as $names) {
-                                            echo "<span>" . $names->common_name . "</span>";
-                                        }
+                                <h4><?php if ($gpec_species[0]->species_htmlname != "") {
+                                        echo $gpec_species[0]->species_htmlname;
                                     }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
+                                    <?php
+                                    if (count($common) > 0)
+                                        foreach ($common as $names){
+                                            echo "<p>".$uses->common_name."</p>";
+                                        }
+                                    else
+                                        echo "No tiene registros";
                                     ?>
                                 </h4>
                                 <h4>
@@ -67,33 +72,48 @@ get_header();
                                         <label class="label label-info">Datos de Taxonom&iacute;a y Nomenclatura</label>
                                         <?php foreach ($synonyms as $syn){
                                             echo "<p>".$syn->synonyms_htmlname."</p>";
-                                        } }?>
+                                        }
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                 </h4>
                                 <div class="">
                                     <label class="label label-info">Origen e Invasibilidad</label>
                                     <?php if ($gpec_species[0]->species_origen != ""){
-                                        echo "<p> Label species origen ".$gpec_species[0]->species_origen."</p>";
-                                    }?>
+                                        echo "<p> Introducido ".$gpec_species[0]->species_origen."</p>";
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_is_naturalized != ""){
                                         echo "<p> Label species_is_naturalized ".$gpec_species[0]->species_is_naturalized."</p>";
-                                    }?>
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_is_invasive != ""){
                                         echo "<p> Label species_is_invasive ".$gpec_species[0]->species_is_invasive."</p>";
-                                    }?>
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_is_atransformer != ""){
                                         echo "<p> Label species_is_atransformer ".$gpec_species[0]->species_is_atransformer."</p>";
-                                    }?>
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_is_aweed != ""){
                                         echo "<p> Label species_is_aweed ".$gpec_species[0]->species_is_aweed."</p>";
-                                    }?>
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_naturalization_reference != ""){
-                                        echo "<p> Label species_naturalization_reference ".$gpec_species[0]->species_naturalization_reference."</p>";
-                                    }?>
+                                        echo "<p>   ".$gpec_species[0]->species_naturalization_reference."</p>";
+                                    }
+                                    else { echo "No tiene datos registrados"; }
+                                    ?>
                                     <?php if ($gpec_species[0]->species_herbarium_specimen != ""){
-                                        echo "<p> Label species_herbarium_specimen ".$gpec_species[0]->species_herbarium_specimen."</p>";
+                                        echo "<p>   ".$gpec_species[0]->species_herbarium_specimen."</p>";
                                     }?>
                                     <?php if ($gpec_species[0]->species_origen_notes != ""){
-                                        echo "<p> Label species_origen_notes ".$gpec_species[0]->species_origen_notes."</p>";
+                                        echo "<p>   ".$gpec_species[0]->species_origen_notes."</p>";
                                     }?>
                                     <p>
                                         <label class="label label-info">Justificación de invasivibilidad en Cuba</label>
@@ -101,7 +121,7 @@ get_header();
                                     </p>
                                     <?php if ($gpec_species[0]->species_plant_growth_form != ""){
                                         echo "<label class=\"label label-info\">Tipo de Planta</label>";
-                                        echo "<p> Label species_origen_notes ".$gpec_species[0]->species_plant_growth_form."</p>";
+                                        echo "<p> ".$gpec_species[0]->species_plant_growth_form."</p>";
                                     }?>
                                     <?php if (count($invasive_route)>0){
                                         echo "<label class=\"label label-info\">Ruta de entrada y proliferación</label>";
@@ -114,7 +134,7 @@ get_header();
 
                                     <p><label class="label label-info">Tipo de impacto registrado</label></p>
                                     <?php if ($gpec_species[0]->species_is_itseffectunknown != ""){
-                                        echo "<p>Label species_is_itseffectunknown ".$gpec_species[0]->species_is_itseffectunknown."</p>";
+                                        echo "<p>  ".$gpec_species[0]->species_is_itseffectunknown."</p>";
                                     }?>
                                     <p>
                                         <?php if (count($invasive_impact)>0) { ?>
@@ -146,7 +166,7 @@ get_header();
                                     <?php } ?>
 
                                     <?php if (count($protected)>0) { ?>
-                                        <p><label class="label label-info">Áreas protegidas</label>
+                                        <p><label class="label label-info">Áreas Protegidas donde ha sido registrada su presencia</label>
                                         <ul>
                                             <?php foreach ($protected as $prot){
                                                 echo "<li>".$prot->ap_name."</li>";

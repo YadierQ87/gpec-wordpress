@@ -44,19 +44,54 @@ get_header();
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h4><?= $gpec_species[0]->species_htmlname; ?> - Hoja de taxón</h4>
-                                        <p><?= $redlist[0]->redlist_rationale ?></p>
+                                        <p>
+                                            <?php if ($redlist[0]->redlist_rationale != ""){
+                                                echo $redlist[0]->redlist_rationale;
+                                            }
+                                            else { echo "No tiene datos registrados"; }
+                                            ?>
+                                        </p>
                                     </div>
                                     <div class="col-md-3">
                                         <table class="">
                                             <thead>
                                             <tr>
                                                 <th class="label-redlist">
-                                                    <?= $redlist[0]->redlist_category ?>
+                                                    <?php if ($redlist[0]->redlist_category != ""){
+                                                        echo $redlist[0]->redlist_category;
+                                                    }
+                                                    else { echo "No tiene datos registrados"; }
+                                                    ?>
                                                 </th>
                                             </tr>
-                                            <tr><th class=""><?= $redlist[0]->redlist_criteria ?></th></tr>
-                                            <tr><th class=""><?= $redlist[0]->redlist_assessment_scope ?></th></tr>
-                                            <tr><th class=""><?= $redlist[0]->redlist_tag ?></th></tr>
+                                            <tr>
+                                                <th class="">
+                                                    <?php if ($redlist[0]->redlist_criteria != ""){
+                                                        echo $redlist[0]->redlist_criteria;
+                                                    }
+                                                    else { echo "No tiene datos registrados"; }
+                                                    ?>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="">
+                                                    <?php if ($redlist[0]->redlist_criteria != ""){
+                                                        echo $redlist[0]->redlist_criteria;
+                                                    }
+                                                    else { echo "No tiene datos registrados"; }
+                                                    ?>
+                                                    <?= $redlist[0]->redlist_assessment_scope ?>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="">
+                                                    <?php if ($redlist[0]->redlist_tag != ""){
+                                                        echo $redlist[0]->redlist_tag;
+                                                    }
+                                                    else { echo "No tiene datos registrados"; }
+                                                    ?>
+                                                </th>
+                                            </tr>
                                             </thead>
                                         </table>
                                     </div>
@@ -66,15 +101,15 @@ get_header();
                                         <p><strong>Sin&oacute;nimos</strong>
                                             <?= $synonims[0]->synonyms_htmlname ?>
                                         <ul style="list-style: none;">
-                                            <li>Familia: <?= $gpec_species[0]->species_family ?> </li>
-                                            <li>Orden: <?= $gpec_species[0]->species_ordername ?></li>
-                                            <li>Clase: <?= $gpec_species[0]->species_classname ?> </li>
-                                            <li>División: <?= $gpec_species[0]->species_division ?> </li>
+                                            <li>Familia: <?php echo ($gpec_species[0]->species_family != "") ? $gpec_species[0]->species_family : "No existe registro";  ?> </li>
+                                            <li>Orden: <?php echo ($gpec_species[0]->species_ordername != "") ? $gpec_species[0]->species_ordername : "No existe registro";  ?> </li>
+                                            <li>Clase: <?php echo ($gpec_species[0]->species_classname != "") ? $gpec_species[0]->species_classname : "No existe registro";  ?> </li>
+                                            <li>División: <?php echo ($gpec_species[0]->species_division != "") ? $gpec_species[0]->species_division : "No existe registro";  ?> </li>
                                         </ul>
                                         </p>
                                         <p>
                                             <strong>Apuntes taxonómicos</strong><br/>
-                                            <?= $gpec_species[0]->species_taxonomic_notes ?>
+                                            <?php echo ($gpec_species[0]->species_taxonomic_notes != "") ? $gpec_species[0]->species_taxonomic_notes : "No existe registro";  ?>
                                         </p>
                                         <p><strong>NOMBRES COMUNES</strong>
                                         <ul style="list-style: none;">
@@ -84,10 +119,10 @@ get_header();
                                         </ul>
                                         </p>
                                         <p><strong>HÁBITAT Y ECOLOGÍA </strong> <br/>
-                                            <?= $assessments[0]->habitat_narrative ?>
+                                            <?php echo ($assessments[0]->habitat_narrative != "") ? $assessments[0]->habitat_narrative : "No existe registro";  ?>
                                         </p>
                                         <p><strong>DISTRIBUCIÓN  </strong> <br/>
-                                            <?= $assessments[0]->range_narrative ?>
+                                            <?php echo ($assessments[0]->range_narrative != "") ? $assessments[0]->range_narrative : "No existe registro";  ?>
                                         </p>
                                     </div>
                                 </div>
@@ -108,16 +143,16 @@ get_header();
                                 ?>
                             </div>
                             <p><strong>POBLACIÓN  </strong> <br/>
-                                <?= $assessments[0]->population_narrative ?>
+                                <?php echo ($assessments[0]->population_narrative != "") ? $assessments[0]->population_narrative : "No existe registro";  ?>
                             </p>
                             <p><strong>AMENAZAS  </strong> <br/>
-                                <?= $assessments[0]->threats_narrative ?>
+                                <?php echo ($assessments[0]->threats_narrative != "") ? $assessments[0]->threats_narrative : "No existe registro";  ?>
                             </p>
                             <p><strong>USO Y COMERCIO  </strong> <br/>
-                                <?= $assessments[0]->uses_narrative ?>
+                                <?php echo ($assessments[0]->uses_narrative != "") ? $assessments[0]->uses_narrative : "No existe registro";  ?>
                             </p>
                             <p><strong>CONSERVACIÓN  </strong> <br/>
-                                <?= $assessments[0]->conservation_actions_narrative ?>
+                                <?php echo ($assessments[0]->conservation_actions_narrative != "") ? $assessments[0]->conservation_actions_narrative : "No existe registro";  ?>
                             </p>
                             <p><strong>REFERENCIAS  </strong> <br/>
                             <ul style="list-style: none;">
@@ -141,16 +176,19 @@ get_header();
                             </ul>
                             </p>
                             <p><strong>AGRADECIMIENTOS  </strong> <br/>
-                                <?= $assessments[0]->redlist_assessment_acknowledgements ?>
+                                <?php echo ($assessments[0]->redlist_assessment_acknowledgements != "") ? $assessments[0]->redlist_assessment_acknowledgements : "No existe registro";  ?>
                             </p>
                             <p><strong>CITACIÓN RECOMENDADA </strong> <br/>
-                                <?= $assessments[0]->summary_recommended_citation ?>
+                                <?php echo ($assessments[0]->summary_recommended_citation != "") ? $assessments[0]->summary_recommended_citation : "No existe registro";  ?>
                             </p>
 
                             <div>
                                 <strong>ANEXO </strong> <br/>
                                 <strong>Formaciones vegetales</strong></br>
-                                <p>El taxón crece en: <?= $habitat[0]->habitats_lookup ?></p>
+                                <p>El taxón crece en:
+                                    <?php echo ($habitat[0]->habitats_lookup != "") ? $habitat[0]->habitats_lookup : "No existe registro";  ?>
+
+                                </p>
                                 <strong>Sitios de presencia:</strong>
                                 <p>
                                 <ul style="list-style: none;">
@@ -206,7 +244,9 @@ get_header();
                                 </ul>
                                 </p>
                                 <strong>Plan de Recuperaci&oacute;n de la especie</strong>
-                                <p><?= $assessments[0]->Species_recovery_plan_url; ?> </p>
+                                <p>
+                                    <?php echo ($assessments[0]->Species_recovery_plan_url != "") ? $assessments[0]->Species_recovery_plan_url : "No existe registro";  ?>
+                                </p>
                                 <p>
                                 <ul style="list-style: none;">
                                     <?php foreach ($assessments as $asset){

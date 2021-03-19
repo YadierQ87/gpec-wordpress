@@ -29,24 +29,25 @@
             </div>
             <div class="col-md-12 my-hidden advance-fields" id="advance-fields" style="margin-bottom: 40px;">
                 <div class="row">
-                    <span class="col-lg-12"> <i class="fa fa-filter"></i> Par&aacute;metros de B&uacute;squeda avanzada</span>
-
                     <div class="col-md-4">
-                        <label for="">Species Genus</label>
+                        <label for="">Género
+                            (nombre del género)</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_genus'];?>"
                                class="form-control" id="species_genus"
-                               name="species_genus" placeholder="Genus">
+                               name="species_genus" placeholder="">
                     </div>
                     <div class="col-md-4">
-                        <label for="">Species Name</label>
+                        <label for="">Especie
+                            (nombre específico)</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_name_form'];?>"
                                class="form-control" id="species_name_form"
-                               name="species_name_form" placeholder="species names"/>
+                               name="species_name_form" placeholder=""/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Species Infra Name</label>
+                        <label for="">Nombre infraespecífico
+                            (nombre de la  subespecie o taxón infraespecífico)</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_infra_name_form'];?>"
                                class="form-control" id="species_infra_name_form"
@@ -55,38 +56,42 @@
 
 
                     <div class="col-md-4">
-                        <label for="">Family</label>
+                        <label for="">Familia botánica</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_family'];?>"
                                class="form-control" id="species_family"
                                name="species_family" placeholder="Family"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Orden </label>
+                        <label for="">Orden
+                            (categoria taxonómica Orden) </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_order_form'];?>"
                                class="form-control" id="species_order_form"
                                name="species_order_form" placeholder="species order"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Clase</label>
+                        <label for="">Clase
+                            (categoría taxonómica Clase)</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_class_form'];?>"
                                class="form-control" id="species_class_form"
                                name="species_class_form" placeholder="species class"/>
                     </div>
 
-                    <div class="separator col-md-12"> <label class="label label-info"> Sinonimos </label>  </div>
+                    <div class="separator col-md-12"> <label class="label label-info"> Sinónimos </label>  </div>
 
                     <div class="col-md-4">
-                        <label for="">Syn Genus</label>
+                        <label for="">Género
+                            (nombre de género del sinónimo conocido)</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_genus_form'];?>"
                                class="form-control" id="syn_genus_form"
                                name="syn_genus_form" placeholder="syn Genus"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Syn Species </label>
+                        <label for="">Especie
+                            (nombre específico del sinónimo conocido) </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_species_form'];?>"
                                class="form-control" id="syn_species_form"
@@ -94,14 +99,16 @@
                     </div>
                     <div class="separator col-md-12">  </div>
                     <div class="col-md-4">
-                        <label for="">Syn Infra rank </label>
+                        <label for="">Nombre infraespecífico
+                            (nombre de la subespecie o variedad del sinónimo conocido) </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank_form'];?>"
                                class="form-control" id="syn_infra_rank_form"
                                name="syn_infra_rank_form" placeholder="syn infra rank"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Syn Infra rank2 </label>
+                        <label for="">Nombre del taxón infraespecífico de segundo orden o rango
+                            (nombre de la variedad o forma del sinónimo conocido) </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank2_form'];?>"
                                class="form-control" id="syn_infra_rank2_form"
@@ -111,10 +118,10 @@
                     <div class="separator col-md-12">   </div>
 
                     <div class="col-md-4">
-                        <label for=""> End&eacute;mica </label>
+                        <label for=""> End&eacute;mico </label>
                         <div class="form-group">
                             <label class="radio-inline">
-                                <input type="radio" name="isendemism" id="isendemism" value="Yes" /> Yes
+                                <input type="radio" name="isendemism" id="isendemism" value="Yes" /> Si
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="isendemism" id="isendemism" value="No" checked="checked"/> No
@@ -122,13 +129,14 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Species Origen </label>
+                        <label for=""> Estatus de la especie en Cuba según su origen biogeográfico
+                            (seleccione categoría de la especie según la posición de Cuba con respecto a su rango de distribución nativo) </label>
                         <?php $seleccion7 = $_POST['sel_species_origen']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_origen",
                             "-- Seleccione --","sel_species_origen",$seleccion7); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Species Presence(?)  </label>
+                        <label for=""> Presencia en Cuba (seleccione estatus actual en Cuba) </label>
                         <?php $seleccion7 = $_POST['sel_species_presence']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_presence",
                             "-- Seleccione --","sel_species_presence",$seleccion7); ?>
@@ -137,17 +145,17 @@
                     <div class="separator col-md-12">   </div>
 
                     <div class="col-md-4">
-                        <label for="">Plant growth form</label>
+                        <label for="">Tipo de planta</label>
                         <?php $seleccion5 = $_POST['sel_species_grow_form']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_plant_growth_form","-- Seleccione --","sel_species_grow_form",$seleccion5); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Habitats lookup</label>
+                        <label for="">Tipo de habitat donde crece la planta</label>
                         <?php $seleccion = $_POST['sel_habitat_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_habitats","habitats_lookup","-- Seleccione --","sel_habitat_lookup",$seleccion); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Uses Lookup </label>
+                        <label for=""> Uso reportado para la planta  </label>
                         <?php $seleccion3 = $_POST['sel_use_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_use","use_lookup","-- Seleccione --","sel_use_lookup",$seleccion3); ?>
                     </div>
@@ -183,11 +191,11 @@
             $lefjoin = " ";
             $addsql = " WHERE 1=1 ";
             //para paginado
-            $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
+            $numero_pagina = (!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){
                 $numero_pagina = 1;
             }
-            $limit = $_POST['limit'];
+            $limit =  (!isset($_POST['limit'])) ? 10 : $_POST['limit'];
             $offset = ($numero_pagina-1) * $limit;
             //preguntas para conformar el sql solo en la table gpec_species
             if ($singular_name != "") {//singular_name puede ser
@@ -256,7 +264,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <?php  //echo var_dump($sql); ?>
+            <?php  echo var_dump($sql); ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -319,7 +327,7 @@
                             $html_paginate = "<nav aria-label='navigation '>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='first' id='first' value='1'>First</button>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='prev' id='prev' value='$prev'>Prev</button>";
-                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$_REQUEST['pag']}'>";
+                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$numero_pagina}'>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='next' id='next' value='$next'>Next</button>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='last' id='last' value='$totalPag'>Last</button>";
                             if ($totalPag > 1){

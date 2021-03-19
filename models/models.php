@@ -32,7 +32,7 @@ class DB_Model{
      */
     public function get_list_distinct_atribute($table_name,$atribute){
         global $wpdb;
-        $items = $wpdb->get_results("SELECT DISTINCT $atribute FROM $table_name");
+        $items = $wpdb->get_results("SELECT DISTINCT $atribute FROM $table_name ");
         return $items;
     }
     /**
@@ -80,10 +80,12 @@ class Gpec_Report extends DB_Model{
         $combo = "<select name='{$select_id}' id='{$select_id}' class='form-control'><option>{$select}</option>";
         $list = $this->get_list_distinct_atribute($table_name,$atribute);        
         foreach ($list as $val){
-            if ($seleccion == $val->$atribute)
-                $combo .= "<option selected='selected'>{$val->$atribute}</option>";
-            else
-                $combo .= "<option>{$val->$atribute}</option>";
+            if($val->$atribute != ""){
+                if ($seleccion == $val->$atribute)
+                    $combo .= "<option selected='selected'>{$val->$atribute}</option>";
+                else
+                    $combo .= "<option>{$val->$atribute}</option>";
+            }             
         }
         $combo .= "</select>";
         return $combo;

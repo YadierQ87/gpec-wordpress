@@ -29,34 +29,33 @@
             </div>
             <div class="col-md-12 my-hidden advance-fields" id="advance-fields" style="margin-bottom: 40px;">
                 <div class="row">
-                    <span class="col-lg-12"> <i class="fa fa-filter"></i> Par&aacute;metros de B&uacute;squeda avanzada</span>
                     <div class="col-md-4">
                         <label for="">G&eacute;nero </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_genus'];?>"
                                class="form-control" id="species_genus"
-                               name="species_genus" placeholder="Genus">
+                               name="species_genus" placeholder="nombre del género">
                     </div>
                     <div class="col-md-4">
                         <label for="">Especie </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_name_form'];?>"
                                class="form-control" id="species_name_form"
-                               name="species_name_form" placeholder="species names"/>
+                               name="species_name_form" placeholder="nombre específico"/>
                     </div>
                     <div class="col-md-4">
                         <label for="">Familia</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_family'];?>"
                                class="form-control" id="species_family"
-                               name="species_family" placeholder="Family"/>
+                               name="species_family" placeholder="Familia botánica"/>
                     </div>
 
                     <div class="col-md-4">
                         <label for=""> End&eacute;mica </label>
                         <div class="form-group">
                             <label class="radio-inline">
-                                <input type="radio" name="isendemism" id="isendemism" value="Yes" /> Yes
+                                <input type="radio" name="isendemism" id="isendemism" value="Yes" /> Si
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="isendemism" id="isendemism" value="No" checked="checked"/> No
@@ -68,20 +67,20 @@
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['auto_common'];?>"
                                class="form-control" id="auto_common"
-                               name="auto_common" placeholder="common names"/>
+                               name="auto_common" placeholder="Nombre Com&uacute;n"/>
                     </div>
 
                     <div class="separator col-md-12">seccion de subtitle </div>
 
                     <div class="col-md-4">
-                        <label for=""> Categor&iacute;a de la IUCN </label>
+                        <label for=""> Categoría de la Lista Roja de la UICN </label>
                         <?php $seleccion8 = $_POST['sel_redlist_category']; ?>
                         <?= $obj->get_combo_data("gpec_assessments","redlist_category",
                             "-- Seleccione --","sel_redlist_category",$seleccion8); ?>
                         <!-- table assestment -->
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Criterio de la IUCN </label>
+                        <label for=""> Criterios de la Lista Roja de la UICN </label>
                         <input type="text"
                                autocomplete="off"
                                value="<?= $_POST['i_redlist_criteria'];?>"
@@ -89,7 +88,7 @@
                                name="i_redlist_criteria" id="i_redlist_criteria" placeholder="redlist criteria">
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Etiquetas de la Categor&iacute;a </label>
+                        <label for=""> Etiqueta a la categoría de la Lista Roja de la UICN </label>
                         <?php $seleccion8 = $_POST['sel_redlist_tag']; ?>
                         <?= $obj->get_combo_data("gpec_assessments","redlist_tag",
                             "-- Seleccione --","sel_redlist_tag",$seleccion8); ?>
@@ -97,14 +96,14 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for=""> Tipos de Amenaza </label>
+                        <label for=""> Tipo de amenaza que enfrenta esta planta </label>
                         <?php $seleccion9 = $_POST['sel_threats_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_threats","threats_lookup",
                             "-- Seleccione --","sel_threats_lookup",$seleccion9); ?>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="">Areas protegidas </label>
+                        <label for="">Área protegida donde ha sido registrada esta planta </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['prot_areas'];?>"
                                class="form-control" id="prot_areas"
@@ -112,11 +111,11 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for=""> Fuera de Areas Protegidas  </label>
+                        <label for=""> ¿se distribuye fuera de áreas protegidas?  </label>
                         <div class="form-group">
                             <label class="radio-inline">
                                 <input type="radio" name="radio_areas_protegidas"
-                                       id="radio_areas_protegidas" value="Yes" /> Yes
+                                       id="radio_areas_protegidas" value="Yes" /> Si
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="radio_areas_protegidas"
@@ -128,13 +127,13 @@
                     <div class="separator col-md-12"> seccion de subtitle </div>
 
                     <div class="col-md-4">
-                        <label for=""> Acciones de Conservaci&oacute;n Necesarias </label>
+                        <label for=""> Acciones de conservación que necesita la especie </label>
                         <?php $seleccion2 = $_POST['sel_conservation_needs']; ?>
                         <?= $obj->get_combo_data("gpec_conservation_needed","conservationneeds_lookup",
                             "-- Seleccione --","sel_conservation_needs",$seleccion2); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Investigaciones Necesarias </label>
+                        <label for=""> Estudios o investigaciones necesarias </label>
                         <?php $seleccion10 = $_POST['sel_researchneeds_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_research_needed","researchneeds_lookup",
                             "-- Seleccione --","sel_researchneeds_lookup",$seleccion10); ?>
@@ -149,20 +148,20 @@
                             "-- Seleccione --","sel_species_grow_form",$seleccion5); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Tipo de Habitats</label>
+                        <label for=""> Tipo de hábitat donde crece esta planta</label>
                         <?php $seleccion = $_POST['sel_habitat_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_habitats","habitats_lookup",
                             "-- Seleccione --","sel_habitat_lookup",$seleccion); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Usos de la especie </label>
+                        <label for=""> Uso reportado para esta especie  </label>
                         <?php $seleccion3 = $_POST['sel_use_lookup']; ?>
                         <?= $obj->get_combo_data("gpec_use","use_lookup",
                             "-- Seleccione --","sel_use_lookup",$seleccion3); ?>
                     </div>
 
                     <div class="col-md-4">
-                        <label for=""> Species Presence(?)  </label>
+                        <label for=""> Presencia en Cuba   </label>
                         <?php $seleccion7 = $_POST['sel_species_presence']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_presence",
                             "-- Seleccione --","sel_species_presence",$seleccion7); ?>
@@ -204,8 +203,10 @@
             if (isset($_REQUEST["buscar_general"])){
                 $numero_pagina = 1;
             }
-            $limit = $_POST['limit'];
-            $offset = ($numero_pagina-1) * $limit;
+            $limit =  (!isset($_POST['limit'])) ? 10 : $_POST['limit'];
+            if ($limit > 0) {
+                $offset = ($numero_pagina-1) * $limit;
+            }
             //preguntas para conformar el sql solo en la table gpec_species
             if ($singular_name != "") {//singular_name puede ser
                 $addsql .= " AND (sp.species_family LIKE '%{$singular_name}%' 
@@ -265,7 +266,6 @@
                 $addsql .= " AND research.researchneeds_lookup LIKE '%{$sel_researchneeds_lookup}%' ";
                 $leftjoin .= " LEFT JOIN gpec_research_needed AS research ON research.internal_taxon_id = sp.internal_taxon_id";
             }
-
             //Para las que no tengan areas protegidas
             if ($fuera_areas_protegidas == "Yes" ){
                 $addsql .= " AND sp.internal_taxon_id NOT IN (SELECT  internal_taxon_id FROM gpec_habitats) ";
@@ -283,7 +283,7 @@
                         gpec_species AS sp
                         LEFT JOIN gpec_common_names AS comn ON comn.internal_taxon_id = sp.internal_taxon_id
                         LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id                        
-                        LEFT JOIN gpec_assessments AS redlist ON redlist.internal_taxon_id = sp.internal_taxon_id
+                        INNER JOIN gpec_assessments AS redlist ON redlist.internal_taxon_id = sp.internal_taxon_id
                         {$leftjoin}                           
                     {$addsql} 
                     GROUP BY sp.internal_taxon_id
@@ -295,7 +295,7 @@
             $maximo = count($query);
             $showing = $maximo - ($offset * $numero_pagina)
             ?>
-            <?php //echo var_dump($sql);  ?>
+            <?php echo var_dump($sql);  ?>
             <?php
             global $wp;
             $totalPag = ceil($rsTotal[0]->total/$limit);
@@ -361,7 +361,7 @@
                             $html_paginate = "<nav aria-label='navigation '>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='first' id='first' value='1'>First</button>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='prev' id='prev' value='$prev'>Prev</button>";
-                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$_REQUEST['pag']}'>";
+                            $html_paginate .= "<input type='text' class='pagination-input' readonly='readonly' name='pag' id='pag' value='{$numero_pagina}'>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='next' id='next' value='$next'>Next</button>";
                             $html_paginate .= "<button type='button' class=\"page-link\" name='last' id='last' value='$totalPag'>Last</button>";
                             if ($totalPag > 1){

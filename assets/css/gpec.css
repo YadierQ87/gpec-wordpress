@@ -20,15 +20,10 @@ body{
     background: #345975;    padding: 8px;    cursor: pointer;    color: #fff;    border: solid 1px #eee;
 }
 .class-input-search{
-    background-color: #f1f1f1;
-    height: 44px;
-    border-radius: 0 !important;
+    background-color: #f1f1f1;    height: 44px;    border-radius: 0 !important;
 }
 .btn-new-search{
-    width: 8%;    float: left;
-    height: 45px !important;
-    border-radius:0 !important;
-    background-color:#345975 !important;
+    width: 8%;    float: left;    height: 45px !important;    border-radius:0 !important;    background-color:#345975 !important;
     color: #fff !important;
 }
 .box-advance{
@@ -41,7 +36,35 @@ body{
 .advance-fields div{
     margin-top: 10px;
 }
-
+/*bootstrap container*/
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+/*end container*/
 .content-area table td{
     text-align: left !important;
 }
@@ -49,26 +72,18 @@ body{
     background: #ff4949 !important;
     color: #fff !important;
 }
-
 .no-margin{
     margin: 0px !important;
 }
-
 .bg-primary{
     color: #fff !important;
 }
 .title{
-    text-align: center;
-    margin-bottom: 30px;
-    margin-top: 10px;
-    text-transform: uppercase;
+    text-align: center;    margin-bottom: 30px;    margin-top: 10px;    text-transform: uppercase;
 }
 
 .checklist-form-search{
-    color: #345975;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    text-align: left;
+    color: #345975;    margin-top: 50px;    margin-bottom: 50px;    text-align: left;
 }
 /*for autocomplete*/
 * { box-sizing: border-box; }
@@ -77,40 +92,24 @@ body {
 }
 .autocomplete {
     /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
+    position: relative;    display: inline-block;
 }
 input {
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
-    padding: 10px;
-    font-size: 16px;
+    border: 1px solid transparent;    background-color: #f1f1f1;    padding: 10px;    font-size: 16px;
 }
 input[type=text] {
-    background-color: #f1f1f1;
-    width: 100%;
+    background-color: #f1f1f1;    width: 100%;
 }
 input[type=submit] {
-    background-color: DodgerBlue;
-    color: #fff;
+    background-color: DodgerBlue;    color: #fff;
 }
 .autocomplete-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
+    position: absolute;    border: 1px solid #d4d4d4;    border-bottom: none;    border-top: none;    z-index: 99;
     /*position the autocomplete items to be the same width as the container:*/
-    margin-top: 45px;
-    margin-left: 0;
-    margin-right: 0;
-    width: 720px;
+    margin-top: 45px;    margin-left: 0;    margin-right: 0;    width: 720px;
 }
 .autocomplete-items div {
-    padding: 5px !important;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4 !important;
+    padding: 5px !important;    cursor: pointer;    background-color: #fff;    border-bottom: 1px solid #d4d4d4 !important;
 }
 .autocomplete-items div:hover {
     /*when hovering an item:*/
@@ -118,14 +117,10 @@ input[type=submit] {
 }
 .autocomplete-active {
     /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
+    background-color: DodgerBlue !important;    color: #ffffff;
 }
 .pagination-input{
-    height: 30px !important; width: 45px !important;
-    background: #fff;
-    text-align: center;
-    color: #444;
+    height: 30px !important; width: 45px !important;    background: #fff;    text-align: center;    color: #444;
 }
 .page-link{
      margin: 3px;
@@ -135,9 +130,7 @@ input[type=submit] {
     margin-left: -15px;
 }
 .col-md-4,.col-md-6,.col-md-12{
-    float: left;
-    margin-left: 15px;
-    margin-right: 15px;
+    float: left;    margin-left: 15px;    margin-right: 15px;
 }
 .col-md-4 {
     width: 30% !important;
@@ -149,23 +142,13 @@ input[type=submit] {
     width: 100% !important;
 }
 .checklist-form-search  input[type="text"]{
-    color: #666 !important;
-    border: 1px solid #E8E8E8 !important;
-    border-radius: 3px !important;
+    color: #666 !important;    border: 1px solid #E8E8E8 !important;    border-radius: 3px !important;
     background-color: #f1f1f1 !important;
 }
 .form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    display: block;    width: 100%;    height: 34px;    padding: 6px 12px;    font-size: 14px;
+    line-height: 1.42857143;    color: #555;    background-color: #fff;
+    background-image: none;    border: 1px solid #ccc;    border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;

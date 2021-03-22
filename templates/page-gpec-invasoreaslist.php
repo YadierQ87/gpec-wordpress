@@ -203,23 +203,28 @@ get_header();
                                             }?>
                                         </p>
                                     <?php } ?>
-                                    <?php if (count($locations)>0) { ?>
-                                        <div class="box-for-maps" style="margin-top: 50px;">
-                                            <strong>Distribuci&oacute;n</strong>
-                                            <?php
-                                            echo do_shortcode('[leaflet-map height=350 width=100% zoomcontrol=1 scrollwheel=1 fitbounds]');
-                                            foreach ($locations as $location)
-                                            {
-                                                $munic = $location->location_municipality;
-                                                $prov = $location->location_province;
-                                                $loc_name = $location->location_name;
-                                                $lat = $location->location_latitude;
-                                                $long = $location->location_longitud;
-                                                echo do_shortcode("[leaflet-marker address='{$munic}, {$prov}' lat={$lat} lng={$long} zoom=5]{$loc_name}[/leaflet-marker]" );
+
+                                    <div class="box-for-maps" style="margin-top: 50px;">
+                                        <strong>Distribución</strong>
+                                        <?php
+                                        if (count($locations) > 0){
+                                            $timit  = 0;
+                                            $shortcode = "[leaflet-map lat=21.175525785037447 lng=-78.22061238986527 zoom=6 height=350 width=100% ][leaflet-marker]";
+                                            $max = count($locations);
+                                            for ($i=0;$i < $max;$i++){
+                                                if ($locations[$i]->location_latitude != "" || $locations[$i]->location_longitud != ""){
+                                                    $shortcode .= "[leaflet-marker lat={$locations[$i]->location_latitude} lng={$locations[$i]->location_longitud} ]{$locations[$i]->location_name}[/leaflet-marker]" ;
+                                                }
                                             }
-                                            ?>
-                                        </div>
-                                    <?php } ?>
+                                            echo do_shortcode($shortcode);
+                                            //var_dump($shortcode);
+                                        }
+                                        else{
+                                            echo "No existen datos registrados!";
+                                        }
+                                        ?>
+                                    </div>
+
                                 </div>
                             </div>
                         </section>

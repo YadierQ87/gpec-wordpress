@@ -177,7 +177,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
             }
-            $addsql = " WHERE sp.species_origen != 'Nativa' ";
+            $addsql = " WHERE (sp.species_origen != 'Nativa' or sp.species_origen != '') ";
             //para paginado
             $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){

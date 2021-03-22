@@ -132,7 +132,7 @@ get_header();
                                 <?php
                                 if (count($locations) > 0){
                                     $timit  = 0;
-                                    $shortcode = "[leaflet-map lat=21.175525785037447 lng=-78.22061238986527 zoom=6 height=350 width=100% ][leaflet-marker]";
+                                    $shortcode = "[leaflet-map lat=21.175525785037447 lng=-78.22061238986527 zoom=6 height=350 width=100% zoomcontrol=1 !scrollwheel min_zoom=5 max_zoom=12]";
                                     $max = count($locations);
                                     for ($i=0;$i < $max;$i++){
                                         if ($locations[$i]->location_latitude != "" || $locations[$i]->location_longitud != ""){

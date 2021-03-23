@@ -306,7 +306,7 @@
             <?php else: ?>
             </br>
             <div class="panel" >
-                <table class="table table-bordered table-hover" style="margin-top: 40px;">
+                <table class="table table-bordered table-striped" style="margin-top: 40px;">
                     <tbody>
                     <tr>
                         <th colspan="2">
@@ -317,8 +317,9 @@
                                 resultado(s) de <span class="badge"><?= $rsTotal[0]->total; ?></span>
                             </p>
                         </th>
-                        <th>
-                            <select id="limit" name="limit">
+                        <th colspan="2">
+                            Número de registros a mostrar
+                            <select id="limit" name="limit" class="select-rows">
                                 <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
                                 <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
                                 <option value="30" <?php if($_POST['limit']==30) echo "selected='selected'" ?>>30</option>
@@ -326,6 +327,12 @@
                                 <option value="100" <?php if($_POST['limit']==100) echo "selected='selected'" ?>>100</option>
                             </select>
                         </th>
+                    </tr>
+                    <tr class="bg-danger">
+                        <th>No</th>
+                        <th> Nombre </th>
+                        <th>Endémico</th>
+                        <th>Categoría</th>
                     </tr>
                     <?php
                     for($i=0; $i< $maximo ;$i++){ ?>

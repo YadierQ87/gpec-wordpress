@@ -72,6 +72,30 @@ body{
     background: #ff4949 !important;
     color: #fff !important;
 }
+.label-danger {
+    background-color: #d9534f;
+}
+.label-success {
+    background-color: #5cb85c;
+}
+.label-primary {
+    background-color: #337ab7;
+}
+.label-warning {
+    background-color: #f0ad4e;
+}
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
 .no-margin{
     margin: 0px !important;
 }
@@ -80,6 +104,43 @@ body{
 }
 .title{
     text-align: center;    margin-bottom: 30px;    margin-top: 10px;    text-transform: uppercase;
+}
+
+.select-rows{
+    display: block;
+    height: 34px;
+    padding: 0 !important;
+    font-size: 14px;
+    margin: 0px;
+    width: 60px;
+}
+
+.bg-success {
+    background-color: #dff0d8;
+}
+.bg-primary {
+    color: #fff;
+    background-color: #337ab7;
+}
+.bg-warning {
+    background-color: #fcf8e3;
+}
+.bg-danger {
+    background-color: #f2dede;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
 }
 
 .checklist-form-search{

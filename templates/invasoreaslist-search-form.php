@@ -273,10 +273,11 @@
             <?php else: ?>
             </br>
             <div class="panel" >
-                <table class="table table-bordered table-hover" style="margin-top: 40px;">
+                <table class="table table-bordered table-striped" style="margin-top: 40px;">
                     <tbody>
                     <tr>
-                        <th colspan="2">
+                        <th> - </th>
+                        <th>
                             <p>P&aacute;gina
                                 <span class="badge"><?= $numero_pagina ?></span>
                                 de <span class="badge"><?= $totalPag ?></span>
@@ -294,11 +295,15 @@
                             </select>
                         </th>
                     </tr>
+                    <tr class="bg-warning">
+                        <th>No</th>
+                        <th colspan="2"> Nombre </th>
+                    </tr>
                     <?php
                     for($i=0; $i< $maximo ;$i++){ ?>
                         <tr>
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
-                            <td >
+                            <td colspan="3">
                                 <span>
                                     <?php  $my_common_names = $obj->get_list_data_taxon("gpec_common_names",$query[$i]->internal_taxon_id);    ?>
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">

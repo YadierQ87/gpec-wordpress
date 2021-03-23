@@ -130,9 +130,9 @@ add_action('wp_enqueue_scripts', 'callback_for_styles_and_scripts');
  */
 function callback_for_styles_and_scripts() {
     wp_register_style( 'namespace', plugins_url('/assets/css/gpec.css',__FILE__ ));
-    wp_register_style( 'namespacecss', plugins_url('/assets/bootstrap/css/bootstrap.css',__FILE__ ));
-    wp_enqueue_style( 'font-awesome', plugins_url( '/assets/font-awesome.css' ), array(), '4.0.0' );
-    wp_enqueue_style( 'namespace' );
+    wp_register_style( 'bootstrap', plugins_url('/assets/bootstrap/css/bootstrap.css',__FILE__ ));
+    wp_enqueue_style( 'font_awesome', plugins_url( '/assets/font-awesome.css' ), array(), '4.0.0' );
+    wp_enqueue_style( 'namespace','font_awesome','bootstrap');
     wp_enqueue_script( 'namespaceformyscript', plugins_url('/assets/js/gpec.js',__FILE__), array( 'jquery' ) );
     wp_enqueue_script( 'namespacebootstrap', plugins_url('/assets/bootstrap/js/bootstrap.js',__FILE__), array( 'bootstrap' ) );
 }

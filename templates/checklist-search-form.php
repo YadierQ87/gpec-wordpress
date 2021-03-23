@@ -236,7 +236,7 @@
             if ($sel_species_grow_form != "-- Seleccione --" and $sel_species_grow_form != "")
                 $addsql .= " AND sp.species_plant_growth_form = '{$sel_species_grow_form}' ";
             //if ($isendemism != "No") TODO cuando este el campo endemism -bool
-                //$addsql .= " AND sp.species_is_aweed LIKE '%{$isendemism}%' ";
+            //$addsql .= " AND sp.species_is_aweed LIKE '%{$isendemism}%' ";
             if ($sel_use_lookup != "-- Seleccione --" and $sel_use_lookup != "")
             {
                 $addsql .= " AND gpec_use.use_lookup = '{$sel_use_lookup}' ";
@@ -275,10 +275,11 @@
             <?php else: ?>
             </br>
             <div class="panel">
-                <table class="table table-bordered table-hover" style="margin-top: 40px;">
+                <table class="table table-bordered table-striped" style="margin-top: 40px;">
                     <tbody>
                     <tr>
-                        <th colspan="2">
+                        <th> - </th>
+                        <th>
                             <div>P&aacute;gina
                                 <span class="badge"><?= $numero_pagina ?></span>
                                 de <span class="badge"><?= $totalPag ?></span>
@@ -287,6 +288,7 @@
                             </div>
                         </th>
                         <th>
+                            Número de registros a mostrar
                             <select id="limit" name="limit">
                                 <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
                                 <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
@@ -296,16 +298,26 @@
                             </select>
                         </th>
                     </tr>
+                    <tr class="bg-success">
+                        <th>No</th>
+                        <th colspan="2"> Nombre </th>
+                    </tr>
                     <?php
                     for($i=0; $i< $maximo ;$i++){ ?>
                         <tr>
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
-                            <td>
-                                <span>
+                            <td colspan="2">
+                                <?php if($query[$i]->species_htmlname != "" and $query[$i]->species_htmlname != "NULL"){ ?>
+                                    <span>
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-checklist/?id={$query[$i]->id}" ?>">
                                         <?= $query[$i]->species_htmlname ?>
                                     </a>
                                 </span>
+                                <?php   }
+                                else{
+                                    echo "No tiene species_htmlname configurado";
+                                }
+                                ?>
                                 <div>
                                     <?php
                                     $synonyms = $obj->get_list_data_taxon("gpec_synonyms",$query[$i]->internal_taxon_id);

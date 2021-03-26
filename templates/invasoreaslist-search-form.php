@@ -1,4 +1,4 @@
-<div id="checklist-form-search" class="container checklist-form-search">
+<div id="checklist-form-search" class="checklist-form-search">
     <h5 class="title"> <i class="fa fa-pagelines"></i> Registro de plantas introducidas e invasoras en Cuba </h5>
     <section >
         <!--TABLA: SynonymsGEPC
@@ -23,7 +23,7 @@
                     <i class="fa fa-search" ></i>
                 </button>
                 <div class="box-advance" id="btn-advance-checklist">
-                    B&uacute;squeda Avanzada
+                    <span class="xs-hidden">B&uacute;squeda Avanzada</span>
                     <i id="spin-search" class="fa fa-caret-down"></i>
                 </div>
             </div>
@@ -286,7 +286,7 @@
                             </p>
                         </th>
                         <th>
-                            <select id="limit" name="limit">
+                            <select id="limit" name="limit" class="select-rows" style="display: block; height: 34px; padding: 0 !important; font-size: 14px;  margin: 0px; width: 60px;">
                                 <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
                                 <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
                                 <option value="30" <?php if($_POST['limit']==30) echo "selected='selected'" ?>>30</option>

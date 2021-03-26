@@ -10,7 +10,7 @@
 get_header();
 ?>
 <main id="site-content" role="main">
-    <div class="container">
+    <div class="page-content container">
         <div class="row">
             <div class="col-md-12">
                 <div class="listing-detail">
@@ -52,7 +52,7 @@ get_header();
                                             ?>
                                         </p>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" style="width: 30%; float: right;">
                                         <table class="">
                                             <thead>
                                             <tr>

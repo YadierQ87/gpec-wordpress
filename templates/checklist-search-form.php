@@ -1,4 +1,4 @@
-<div id="checklist-form-search" class="container checklist-form-search">
+<div id="checklist-form-search" class="checklist-form-search">
     <h5 class="title"> <i class="fa fa-pagelines"></i> Checklist de la flora de Cuba - GPEC </h5>
     <section >
         <!--TABLA: SynonymsGEPC
@@ -23,35 +23,32 @@
                     <i class="fa fa-search" ></i>
                 </button>
                 <div class="box-advance" id="btn-advance-checklist">
-                    B&uacute;squeda Avanzada
+                    <span class="xs-hidden">B&uacute;squeda Avanzada</span>
                     <i id="spin-search" class="fa fa-caret-down"></i>
                 </div>
             </div>
             <div class="col-md-12 my-hidden advance-fields" id="advance-fields" style="margin-bottom: 40px;">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="">Género
-                            (nombre del género)</label>
+                        <label for="">Género</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_genus'];?>"
                                class="form-control" id="species_genus"
-                               name="species_genus" placeholder="">
+                               name="species_genus" placeholder="nombre del género">
                     </div>
                     <div class="col-md-4">
-                        <label for="">Especie
-                            (nombre específico)</label>
+                        <label for="">Especie</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_name_form'];?>"
                                class="form-control" id="species_name_form"
-                               name="species_name_form" placeholder=""/>
+                               name="species_name_form" placeholder="nombre específico"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Nombre infraespecífico
-                            (nombre de la  subespecie o taxón infraespecífico)</label>
+                        <label for="">Nombre infraespecífico</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_infra_name_form'];?>"
                                class="form-control" id="species_infra_name_form"
-                               name="species_infra_name_form" placeholder="species names"/>
+                               name="species_infra_name_form" placeholder="nombre de la  subespecie o taxón infraespecífico"/>
                     </div>
 
 
@@ -60,59 +57,53 @@
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_family'];?>"
                                class="form-control" id="species_family"
-                               name="species_family" placeholder="Family"/>
+                               name="species_family" placeholder="Familia botánica"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Orden
-                            (categoria taxonómica Orden) </label>
+                        <label for="">Orden</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_order_form'];?>"
                                class="form-control" id="species_order_form"
-                               name="species_order_form" placeholder="species order"/>
+                               name="species_order_form" placeholder="categoría taxonómica Orden"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Clase
-                            (categoría taxonómica Clase)</label>
+                        <label for="">Clase</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_class_form'];?>"
                                class="form-control" id="species_class_form"
-                               name="species_class_form" placeholder="species class"/>
+                               name="species_class_form" placeholder="categoría taxonómica Clase"/>
                     </div>
 
                     <div class="separator col-md-12"> <label class="label label-info"> Sinónimos </label>  </div>
 
                     <div class="col-md-4">
-                        <label for="">Género
-                            (nombre de género del sinónimo conocido)</label>
+                        <label for="">Género</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_genus_form'];?>"
                                class="form-control" id="syn_genus_form"
-                               name="syn_genus_form" placeholder="syn Genus"/>
+                               name="syn_genus_form" placeholder="nombre de género del sinónimo conocido"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Especie
-                            (nombre específico del sinónimo conocido) </label>
+                        <label for="">Especie </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_species_form'];?>"
                                class="form-control" id="syn_species_form"
-                               name="syn_species_form" placeholder="syn species"/>
+                               name="syn_species_form" placeholder="nombre específico del sinónimo conocido"/>
                     </div>
                     <div class="separator col-md-12">  </div>
                     <div class="col-md-4">
-                        <label for="">Nombre infraespecífico
-                            (nombre de la subespecie o variedad del sinónimo conocido) </label>
+                        <label for="">Nombre infraespecífico</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank_form'];?>"
                                class="form-control" id="syn_infra_rank_form"
-                               name="syn_infra_rank_form" placeholder="syn infra rank"/>
+                               name="syn_infra_rank_form" placeholder="nombre de la subespecie o variedad del sinónimo conocido"/>
                     </div>
                     <div class="col-md-4">
-                        <label for="">Nombre del taxón infraespecífico de segundo orden o rango
-                            (nombre de la variedad o forma del sinónimo conocido) </label>
+                        <label for="">Nombre del taxón infraespecífico de segundo orden o rango</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['syn_infra_rank2_form'];?>"
                                class="form-control" id="syn_infra_rank2_form"
-                               name="syn_infra_rank2_form" placeholder="syn infra rank2"/>
+                               name="syn_infra_rank2_form" placeholder="nombre de la variedad o forma del sinónimo conocido"/>
                     </div>
 
                     <div class="separator col-md-12">   </div>
@@ -130,13 +121,13 @@
                     </div>
                     <div class="col-md-4">
                         <label for=""> Estatus de la especie en Cuba según su origen biogeográfico
-                            (seleccione categoría de la especie según la posición de Cuba con respecto a su rango de distribución nativo) </label>
+                            </label>
                         <?php $seleccion7 = $_POST['sel_species_origen']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_origen",
                             "-- Seleccione --","sel_species_origen",$seleccion7); ?>
                     </div>
                     <div class="col-md-4">
-                        <label for=""> Presencia en Cuba (seleccione estatus actual en Cuba) </label>
+                        <label for=""> Presencia en Cuba </label>
                         <?php $seleccion7 = $_POST['sel_species_presence']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_presence",
                             "-- Seleccione --","sel_species_presence",$seleccion7); ?>
@@ -289,7 +280,7 @@
                         </th>
                         <th>
                             Número de registros a mostrar
-                            <select id="limit" name="limit">
+                            <select id="limit" name="limit" class="select-rows" style="display: block; height: 34px; padding: 0 !important; font-size: 14px;  margin: 0px; width: 60px;">
                                 <option value="10" <?php if($_POST['limit']==10) echo "selected='selected'" ?> >10</option>
                                 <option value="20" <?php if($_POST['limit']==20) echo "selected='selected'" ?>>20</option>
                                 <option value="30" <?php if($_POST['limit']==30) echo "selected='selected'" ?>>30</option>

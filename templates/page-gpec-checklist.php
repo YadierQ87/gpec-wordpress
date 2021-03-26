@@ -10,7 +10,7 @@
 get_header();
 ?>
     <main id="site-content" role="main">
-        <div class="container">
+        <div class="page-content container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="listing-detail">
@@ -46,7 +46,7 @@ get_header();
                                     ?>
                                 </div>
                                 <div class="panel">
-                                    <div>En Cuba, este taxón es: <br/>
+                                    <div>Estatus de la especie en Cuba según su origen biogeográfico: <br/>
                                         <?php
                                         if($gpec_species[0]->species_origen != "")
                                             echo $gpec_species[0]->species_origen;
@@ -54,7 +54,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </div>
-                                    <p>Notas sobre el origen de este tax&oacute;n:<br/>
+                                    <p>Notas sobre su origen:<br/>
                                         <?php
                                         if($gpec_species[0]->species_origen_notes != "")
                                             echo $gpec_species[0]->species_origen_notes;
@@ -62,7 +62,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p>End&eacute;mico:<br/>
+                                    <p>Endémico de Cuba:<br/>
                                         <?php
                                         if($gpec_species[0]->species_endemism != "")
                                             echo $gpec_species[0]->species_endemism;
@@ -86,7 +86,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p> Herbarium label <br/>
+                                    <p> Espécimen de herbario u otra fuente de referencia <br/>
                                         <?php
                                         if($gpec_species[0]->species_herbarium_specimen != "")
                                             echo $gpec_species[0]->species_herbarium_specimen;
@@ -94,7 +94,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p> Preference Reference label <br/>
+                                    <p>
                                         <?php
                                         if($gpec_species[0]->species_presence_reference != "")
                                             echo $gpec_species[0]->species_presence_reference;
@@ -102,7 +102,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p> Tipo de planta: <br/>
+                                    <p> Tipo de planta <br/>
                                         <?php
                                         if($gpec_species[0]->species_plant_growth_form != "")
                                             echo $gpec_species[0]->species_plant_growth_form;
@@ -110,7 +110,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p>Tipos de hábitats usados por este taxón:
+                                    <p>Tipo de hábitat donde crece esta planta:
                                     <ul>
                                         <?php
                                         if (count($habitat) > 0)
@@ -122,7 +122,7 @@ get_header();
                                         ?>
                                     </ul>
                                     </p>
-                                    <p>Usos del taxón en Cuba:
+                                    <p>Usos reportados para esta planta en Cuba:
                                     <ul>
                                         <?php
                                         if (count($use_lookup) > 0)
@@ -148,7 +148,7 @@ get_header();
                                     <p>
                                         <?php
                                         if( count($redlist)>0 ){ ?>
-                                            <a class="bg-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-redlist/?id={$redlist[0]->id}";?>">
+                                            <a class="bg-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-redlist/?id={$gpec_species[0]->id}";?>">
                                                 M&aacute;s Informaci&oacute;n
                                             </a>
                                         <?php }

@@ -30,25 +30,25 @@
             <div class="col-md-12 my-hidden advance-fields" id="advance-fields" style="margin-bottom: 40px;">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="">Género (nombre del género)</label>
+                        <label for="">Género </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_genus'];?>"
                                class="form-control" id="species_genus"
-                               name="species_genus" placeholder="Genus">
+                               name="species_genus" placeholder="nombre del género">
                     </div>
                     <div class="col-md-4">
-                        <label for="">Especie (nombre específico)</label>
+                        <label for="">Especie </label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_name_form'];?>"
                                class="form-control" id="species_name_form"
-                               name="species_name_form" placeholder="species names"/>
+                               name="species_name_form" placeholder="nombre específico"/>
                     </div>
                     <div class="col-md-4">
                         <label for="">Familia botánica</label>
                         <input type="text" autocomplete="off"
                                value="<?= $_POST['species_family'];?>"
                                class="form-control" id="species_family"
-                               name="species_family" placeholder="Family"/>
+                               name="species_family" placeholder=" Familia botánica "/>
                     </div>
 
                     <div class="col-md-4">
@@ -68,18 +68,17 @@
                     <div class="separator col-md-12">&nbsp;</div>
 
                     <div class="col-md-4">
-                        <label for=""> Estatus de la especie en Cuba según su origen
-                            (seleccione si es una especie introducida o criptogénica) </label>
-                        <select class="form-control">
-                            <option value="">Seleccione</option>
-                            <option value="Introducida">Introducida</option>
-                            <option value="criptogénica">Criptogénica</option>
+                        <label for=""> Estatus de la especie en Cuba según su origen  </label>
+                        <select class="form-control" name="sel_status_origen">
+                            <option value="--Seleccione--">--Seleccione--</option>
+                            <option value="introducida">Introducida</option>
+                            <option value="criptogenica">Criptogénica</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="">Estatus de Invasora en Cuba</label>
                         <?php $seleccion4 = $_POST['sel_is_invasive']; ?>
-                        <?= $obj->get_combo_data("gpec_species","species_is_invasive",
+                        <?= $obj->get_combo_data("gpec_invasive","species_is_invasive",
                             "--Seleccione--","sel_is_invasive",$seleccion4); ?>
                     </div>
 
@@ -87,36 +86,27 @@
 
                     <div class="col-md-4">
                         <label for="">Reportada como maleza </label>
-                        <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" name="isweed" id="isweed" value="Yes" /> Si
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="isweed" id="isweed" value="No" checked="checked"/> No
-                            </label>
-                        </div>
+                        <select name="isweed" id="isweed" class="form-control">
+                            <option value="--Seleccione--">--Seleccione--</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="">Registrada como transformadora en Cuba</label>
-                        <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" name="istransformer" id="istransformer" value="Yes" /> Si
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="istransformer" id="istransformer" value="No" checked="checked"/> No
-                            </label>
-                        </div>
+                        <select name="istransformer" id="istransformer" class="form-control">
+                            <option value="--Seleccione--">--Seleccione--</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for="">Especie con efecto aún desconocido</label>
-                        <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" name="effectunknown" id="effectunknown" value="Yes" /> Si
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="effectunknown" id="effectunknown" value="No" checked="checked"/> No
-                            </label>
-                        </div>
+                        <select name="effectunknown" id="effectunknown" class="form-control">
+                            <option value="--Seleccione--">--Seleccione--</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for=""> Uso reportado para la planta </label>
@@ -128,7 +118,7 @@
                     <div class="col-md-4">
                         <label for=""> Ruta de entrada y proliferación </label>
                         <?php $seleccion2 = $_POST['sel_invasive_route']; ?>
-                        <?= $obj->get_combo_data("gpec_invasive_entry_route","invasive_entry_route ",
+                        <?= $obj->get_combo_data("gpec_invasive_entry_route","invasive_entry_route",
                             "--Seleccione--","sel_invasive_route",$seleccion2); ?>
                     </div>
                     <div class="col-md-4">
@@ -168,7 +158,7 @@
                 $impact_lookup = $_REQUEST["sel_invasive_impact_lookup"];
                 $species_grow_form = $_REQUEST["sel_species_grow_form"];
                 $sel_is_invasive = $_REQUEST["sel_is_invasive"];
-                $sel_species_origen = $_REQUEST["sel_species_origen"];#new todo put in filter
+                $sel_species_origen = $_REQUEST["sel_status_origen"];#new todo put in filter
                 $radio_isweed = $_REQUEST["isweed"];
                 $radio_istransformer = $_REQUEST["istransformer"];
                 $radio_effectunknown = $_REQUEST["effectunknown"];
@@ -177,7 +167,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
             }
-            $addsql = " WHERE (sp.species_origen != 'Nativa' or sp.species_origen != '') ";
+            $addsql = " WHERE (sp.species_origen != 'Nativa' and sp.species_origen != 'Null') ";
             //para paginado
             $numero_pagina =(int)(!isset($_REQUEST['pag'])) ? 1 : $_REQUEST['pag'];
             if (isset($_REQUEST["buscar_general"])){
@@ -190,6 +180,7 @@
                 $addsql .= " AND (sp.species_family LIKE '%{$singular_name}%' 
                     OR sp.species_genus LIKE '%{$singular_name}%' 
                     OR sp.species_name LIKE '%{$singular_name}%' 
+                    OR sp.species_htmlname LIKE '%{$singular_name}%' 
                     OR sp.species_infra_rank_name LIKE '%{$singular_name}%' 
                     OR syns.synonyms_genus LIKE '%{$singular_name}%' 
                     OR syns.synonyms_species_name LIKE '%{$singular_name}%' 
@@ -200,7 +191,7 @@
             //cuando el filtro es busqueda avanzada
             $leftjoin = "";
             if ($species_family != "")
-                $addsql .= " AND sp.species_family LIKE '%{$species_family}%' ";
+                $addsql .= " AND sp.species_family = '{$species_family}' ";
             if ($species_name_form != "")
                 $addsql .= " AND sp.species_name LIKE '%{$species_name_form}%' ";
             if ($common_names != "")
@@ -209,14 +200,19 @@
                 $addsql .= " AND sp.species_genus LIKE '%{$species_genus}%' ";
             if ($species_grow_form != "--Seleccione--" and $species_grow_form != "")
                 $addsql .= " AND sp.species_plant_growth_form = '{$species_grow_form}' ";
-            if ($sel_is_invasive != "--Seleccione--" and $sel_is_invasive != "")
-                $addsql .= " AND sp.species_is_invasive = '{$sel_is_invasive}' ";
-            if ($radio_isweed != "No")
-                $addsql .= " AND sp.species_is_aweed LIKE '%{$radio_isweed}%' ";
-            if ($radio_istransformer != "No")
-                $addsql .= " AND sp.species_is_atransformer LIKE '%{$radio_istransformer}%' ";
-            if ($radio_effectunknown != "No")
-                $addsql .= " AND sp.species_is_itseffectunknown LIKE '%{$radio_effectunknown}%' ";
+            if ($sel_is_invasive != "--Seleccione--" and $sel_is_invasive != ""){
+                $addsql .= " AND invasive.species_is_invasive = '{$sel_is_invasive}' ";
+            }
+            if ( $radio_isweed != "--Seleccione--" and $radio_isweed != "")
+                $addsql .= " AND invasive.species_is_aweed = '{$radio_isweed}' ";
+            if ( $radio_istransformer != "--Seleccione--" and $radio_istransformer != "")
+                $addsql .= " AND invasive.species_is_atransformer = '{$radio_istransformer}' ";
+            if ($radio_effectunknown != "--Seleccione--" and $radio_effectunknown != "")
+                $addsql .= " AND invasive.species_is_itseffectunknown = '{$radio_effectunknown}' ";
+            if ($sel_species_origen == "criptogenica")
+                $addsql .= " AND sp.species_origen  LIKE '%criptog%' ";
+            if ($sel_species_origen == "introducida")
+                $addsql .= " AND sp.species_origen  LIKE '%Introducid%'  ";
             if ($sel_use_lookup != "--Seleccione--" and $sel_use_lookup != "")
             {
                 $leftjoin .= " LEFT JOIN gpec_use ON gpec_use.internal_taxon_id = sp.internal_taxon_id ";
@@ -250,7 +246,8 @@
                     FROM
                         gpec_species AS sp
                         LEFT JOIN gpec_common_names AS comn ON comn.internal_taxon_id = sp.internal_taxon_id
-                        LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id 
+                        LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id    
+                        LEFT JOIN gpec_invasive AS invasive ON invasive.internal_taxon_id = sp.internal_taxon_id                         
                         {$leftjoin} 
                     {$addsql} 
                     GROUP BY sp.internal_taxon_id, sp.species_family,sp.species_genus,sp.species_name
@@ -277,7 +274,7 @@
                     <tbody>
                     <tr>
                         <th> - </th>
-                        <th>
+                        <th colspan="2">
                             <p>P&aacute;gina
                                 <span class="badge"><?= $numero_pagina ?></span>
                                 de <span class="badge"><?= $totalPag ?></span>
@@ -297,17 +294,19 @@
                     </tr>
                     <tr class="bg-warning">
                         <th>No</th>
-                        <th colspan="2"> Nombre </th>
+                        <th > Nombre </th>
+                        <th > Invasora </th>
+                        <th > Familia </th>
                     </tr>
                     <?php
                     for($i=0; $i< $maximo ;$i++){ ?>
                         <tr>
                             <td> <?= ($i+1)+$limit*($numero_pagina-1) ?> </td>
-                            <td colspan="3">
+                            <td >
                                 <span>
                                     <?php  $my_common_names = $obj->get_list_data_taxon("gpec_common_names",$query[$i]->internal_taxon_id);    ?>
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$query[$i]->id}" ?>">
-                                        <?= $query[$i]->species_htmlname ?> (<?= $query[$i]->species_family; ?>)
+                                        <?= $query[$i]->species_htmlname ?>
                                     </a>
                                     <br/>
                                     <?php
@@ -317,6 +316,8 @@
                                     ?>
                                 </span>
                             </td>
+                            <td>"tipo de Invasora llenar"</td>
+                            <td><?= $query[$i]->species_family; ?></td>
                         </tr>
                     <?php  } ?>
                     </tbody>

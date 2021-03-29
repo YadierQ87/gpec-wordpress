@@ -75,12 +75,11 @@ get_header();
                                             </tr>
                                             <tr>
                                                 <th class="">
-                                                    <?php if ($redlist[0]->redlist_criteria != ""){
-                                                        echo $redlist[0]->redlist_criteria;
+                                                    <?php if ($redlist[0]->redlist_assessment_scope != ""){
+                                                        echo $redlist[0]->redlist_assessment_scope;
                                                     }
                                                     else { echo "No tiene datos registrados"; }
                                                     ?>
-                                                    <?= $redlist[0]->redlist_assessment_scope ?>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -88,7 +87,6 @@ get_header();
                                                     <?php if ($redlist[0]->redlist_tag != ""){
                                                         echo $redlist[0]->redlist_tag;
                                                     }
-                                                    else { echo "No tiene datos registrados"; }
                                                     ?>
                                                 </th>
                                             </tr>
@@ -98,25 +96,41 @@ get_header();
                                     <div class="col-md-12">
                                         <p><strong>TAXONOMÍA</strong> </p>
                                         <p><?= $gpec_species[0]->species_htmlname; ?></p>
-                                        <p><strong>Sin&oacute;nimos</strong>
-                                            <?= $synonims[0]->synonyms_htmlname ?>
-                                        <ul style="list-style: none;">
+                                        <p>
+                                        <ul style="list-style: none;padding-left: 0px;">
                                             <li>Familia: <?php echo ($gpec_species[0]->species_family != "") ? $gpec_species[0]->species_family : "No existe registro";  ?> </li>
                                             <li>Orden: <?php echo ($gpec_species[0]->species_ordername != "") ? $gpec_species[0]->species_ordername : "No existe registro";  ?> </li>
                                             <li>Clase: <?php echo ($gpec_species[0]->species_classname != "") ? $gpec_species[0]->species_classname : "No existe registro";  ?> </li>
                                             <li>División: <?php echo ($gpec_species[0]->species_division != "") ? $gpec_species[0]->species_division : "No existe registro";  ?> </li>
                                         </ul>
+                                            <strong>Sin&oacute;nimos</strong>
+                                        <?php
+                                            if ($synonims[0]->synonyms_htmlname != "" and $synonims[0]->synonyms_htmlname != "Null"){
+                                                echo $synonims[0]->synonyms_htmlname;
+                                            }
+                                            else
+                                                echo "No se reportan"
+                                        ?>
                                         </p>
                                         <p>
-                                            <strong>Apuntes taxonómicos</strong><br/>
-                                            <?php echo ($gpec_species[0]->species_taxonomic_notes != "") ? $gpec_species[0]->species_taxonomic_notes : "No existe registro";  ?>
+                                            <?php
+                                            if ($gpec_species[0]->species_taxonomic_notes != "" and $gpec_species[0]->species_taxonomic_notes != "Null"){
+                                                echo "<strong>Apuntes taxonómicos</strong><br/>";
+                                                echo $gpec_species[0]->species_taxonomic_notes;
+                                            }
+                                            ?>
                                         </p>
                                         <p><strong>NOMBRES COMUNES</strong>
-                                        <ul style="list-style: none;">
-                                            <?php foreach ($common_names as $common){
-                                                echo "<li>".$common->common_name."</li>";
-                                            }?>
-                                        </ul>
+                                            <?php
+                                            if ( count($common_names) > 0 ){
+                                                foreach ($common_names as $common){
+                                                    echo "<div>".$common->common_name."</div>";
+                                                }
+                                            }
+                                            else{
+                                                echo "No se reportan";
+                                            }
+                                            ?>
                                         </p>
                                         <p><strong>HÁBITAT Y ECOLOGÍA </strong> <br/>
                                             <?php echo ($assessments[0]->habitat_narrative != "") ? $assessments[0]->habitat_narrative : "No existe registro";  ?>
@@ -162,7 +176,8 @@ get_header();
                             <p><strong>REFERENCIAS  </strong> <br/>
                             <ul style="list-style: none;">
                                 <?php foreach ($references as $ref){
-                                    echo "<li>".$ref->species_referencias_general."</li>";
+                                    if ($ref->reference_type == "Assessment")
+                                        echo "<li>".$ref->species_referencias_general."</li>";
                                 }?>
                             </ul>
                             </p>
@@ -190,13 +205,21 @@ get_header();
                             <div>
                                 <strong>ANEXO </strong> <br/>
                                 <strong>Formaciones vegetales</strong></br>
-                                <p>El taxón crece en:
-                                    <?php echo ($habitat[0]->habitats_lookup != "") ? $habitat[0]->habitats_lookup : "No existe registro";  ?>
-
+                                <p>El taxón crece en:<br/>
+                                    <?php
+                                    if ( count($habitat)> 0){
+                                        foreach ($habitat as $hab){
+                                            echo "<div style='padding-left: 40px;'>".$hab->habitats_lookup."</div>";
+                                        }
+                                    }
+                                    else{
+                                        echo "Información no disponible";
+                                    }
+                                    ?>
                                 </p>
                                 <strong>Sitios de presencia:</strong>
                                 <p>
-                                <ul style="list-style: none;">
+                                <ul style="list-style: none;pa">
                                     <?php foreach ($locations as $loc){
                                         echo "<li>".$loc->location_name."</li>";
                                     }?>

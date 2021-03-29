@@ -35,82 +35,75 @@ get_header();
                                 <h3>Checklist de la flora de Cuba-GPEC</h3>
                                 <h4> <?=  $gpec_species[0]->species_htmlname; ?></h4>
                                 <div class="">
-                                    <label class="label label-info">Sin&oacute;nimos</label>
+                                    <strong>Taxonomía y Sinónimos</strong></br>
+                                    <div>
+                                        <span><?=  $gpec_species[0]->species_family; ?>/<?=  $gpec_species[0]->species_ordername; ?>/<?=  $gpec_species[0]->species_classname; ?></span>
+                                    </div>
+                                    <span>Sin&oacute;nimos</span>
                                     <?php
                                     if (count($synonyms) > 0)
                                         foreach ($synonyms as $syn){
                                             echo "<p>".$syn->synonyms_htmlname."</p>";
                                         }
                                     else
-                                        echo "No tiene registros";
+                                        echo "Información no disponibles";
                                     ?>
                                 </div>
+                                <br/>
                                 <div class="panel">
-                                    <div>Estatus de la especie en Cuba según su origen biogeográfico: <br/>
+                                    <div><strong>Estatus de la especie en Cuba según su origen biogeográfico</strong> <br/>
                                         <?php
-                                        if($gpec_species[0]->species_origen != "")
+                                        if($gpec_species[0]->species_origen != "" and $gpec_species[0]->species_origen != "Null")
                                             echo $gpec_species[0]->species_origen;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
                                     </div>
-                                    <p>Notas sobre su origen:<br/>
+                                    <p><strong>Notas sobre su origen</strong><br/>
                                         <?php
-                                        if($gpec_species[0]->species_origen_notes != "")
+                                        if($gpec_species[0]->species_origen_notes != "" and $gpec_species[0]->species_origen_notes != "Null")
                                             echo $gpec_species[0]->species_origen_notes;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
                                     </p>
-                                    <p>Endémico de Cuba:<br/>
+                                    <p><strong>Endémico de Cuba</strong><br/>
                                         <?php
-                                        if($gpec_species[0]->species_endemism != "")
+                                        if($gpec_species[0]->species_endemism != "" and $gpec_species[0]->species_endemism != "Null")
                                             echo $gpec_species[0]->species_endemism;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
-                                    </p>
-                                    <p> <br/>
                                         <?php
-                                        if($gpec_species[0]->species_endemism_type != "")
-                                            echo $gpec_species[0]->species_endemism_type;
-                                        else
-                                            echo "No tiene registro";
-                                        ?>
+                                        if($gpec_species[0]->species_endemism_type != "" and $gpec_species[0]->species_endemism_type != "Null")
+                                            echo $gpec_species[0]->species_endemism_type; ?>
                                     </p>
-                                    <p>Estatus actual en Cuba: <br/>
+
+                                    <p><strong>Estatus actual en Cuba:</strong> <br/>
                                         <?php
-                                        if($gpec_species[0]->species_presence != "")
+                                        if($gpec_species[0]->species_presence != "" and $gpec_species[0]->species_presence != "Null")
                                             echo $gpec_species[0]->species_presence;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
                                     </p>
-                                    <p> Espécimen de herbario u otra fuente de referencia <br/>
+                                    <p> <strong>Espécimen de herbario u otra fuente de referencia</strong> <br/>
                                         <?php
-                                        if($gpec_species[0]->species_herbarium_specimen != "")
+                                        if($gpec_species[0]->species_herbarium_specimen != "" and $gpec_species[0]->species_herbarium_specimen != "Null")
                                             echo $gpec_species[0]->species_herbarium_specimen;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
                                     </p>
-                                    <p>
+                                    <p> <strong>Tipo de planta</strong> <br/>
                                         <?php
-                                        if($gpec_species[0]->species_presence_reference != "")
-                                            echo $gpec_species[0]->species_presence_reference;
-                                        else
-                                            echo "No tiene registro";
-                                        ?>
-                                    </p>
-                                    <p> Tipo de planta <br/>
-                                        <?php
-                                        if($gpec_species[0]->species_plant_growth_form != "")
+                                        if($gpec_species[0]->species_plant_growth_form != "" and $gpec_species[0]->species_plant_growth_form != "Null")
                                             echo $gpec_species[0]->species_plant_growth_form;
                                         else
-                                            echo "No tiene registro";
+                                            echo "Información no disponible";
                                         ?>
                                     </p>
-                                    <p>Tipo de hábitat donde crece esta planta:
+                                    <p><strong>Tipo de hábitat donde crece esta planta</strong>
                                     <ul>
                                         <?php
                                         if (count($habitat) > 0)
@@ -118,11 +111,11 @@ get_header();
                                                 echo "<p>".$hab->habitats_lookup."</p>";
                                             }
                                         else
-                                            echo "No tiene registros";
+                                            echo "Información no disponible";
                                         ?>
                                     </ul>
                                     </p>
-                                    <p>Usos reportados para esta planta en Cuba:
+                                    <p><strong>Usos reportados para esta planta en Cuba</strong>
                                     <ul>
                                         <?php
                                         if (count($use_lookup) > 0)
@@ -130,30 +123,31 @@ get_header();
                                                 echo "<p>".$uses->use_lookup."</p>";
                                             }
                                         else
-                                            echo "No tiene registros";
+                                            echo "Información no disponible";
                                         ?>
                                     </ul>
-                                    <div>Referencias:<br/>
+                                    <div><strong>Referencias:</strong><br/>
                                         <ul>
                                             <?php
                                             if (count($references) > 0)
                                                 foreach ($references as $ref){
-                                                    echo "<p>".$ref->species_referencias_general."</p>";
+                                                    if ($ref->reference_type == "Presence")
+                                                        echo "<p>".$ref->species_referencias_general."</p>";
                                                 }
                                             else
-                                                echo "No tiene registros";
+                                                echo "Información no disponibles";
                                             ?>
                                         </ul>
                                     </div>
                                     <p>
                                         <?php
                                         if( count($redlist)>0 ){ ?>
-                                            <a class="bg-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-redlist/?id={$gpec_species[0]->id}";?>">
+                                            <a class="btn btn-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-redlist/?id={$gpec_species[0]->id}";?>">
                                                 M&aacute;s Informaci&oacute;n
                                             </a>
                                         <?php }
                                         if( $gpec_species[0]->species_origen != "Nativa" ){ ?>
-                                            <a class="bg-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$gpec_species[0]->id}";?>">
+                                            <a class="btn btn-info" href="<?php  echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-invasoreas/?id={$gpec_species[0]->id}";?>">
                                                 M&aacute;s Informaci&oacute;n
                                             </a>
                                         <?php } ?>

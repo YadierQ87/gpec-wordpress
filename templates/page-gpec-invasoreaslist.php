@@ -28,6 +28,7 @@ get_header();
                                 $use_lookup = $obj->get_list_data_taxon("gpec_use",$internal_taxon_id);
                                 $references = $obj->get_list_data_taxon("gpec_references",$internal_taxon_id);
                                 $assessments = $obj->get_list_data_taxon("gpec_assessments",$internal_taxon_id);
+                                $invasive = $obj->get_list_data_taxon("gpec_invasive",$internal_taxon_id);
                                 $invasive_route = $obj->get_list_data_taxon("gpec_invasive_entry_route",$internal_taxon_id);
                                 $invasive_impact = $obj->get_list_data_taxon("gpec_invasive_impact",$internal_taxon_id);
                                 $locations = $obj->get_list_data_taxon("gpec_distribution",$internal_taxon_id);
@@ -45,66 +46,70 @@ get_header();
                                     <?php
                                     if (count($common) > 0)
                                         foreach ($common as $names){
-                                            echo "<p>".$uses->common_name."</p>";
+                                            echo "<p>".$names->common_name."</p>";
                                         }
                                     else
-                                        echo "No tiene registros";
+                                        echo "<br/>Nombre comun<br/> No tiene registros";
                                     ?>
                                 </h4>
-                                <h4>
+                                <p>
+                                    <strong class="">Datos de Taxonom&iacute;a y Nomenclatura</strong><br/>
+                                </p>
+                                <p>
                                     <?php if ($gpec_species[0]->species_family != "") {
                                         echo $gpec_species[0]->species_family;
                                     }
                                     ?>
                                     <?php
                                     if ($gpec_species[0]->species_ordername != ""){
-                                        echo " & ".$gpec_species[0]->species_ordername;
+                                        echo " / ".$gpec_species[0]->species_ordername;
                                     }
                                     ?>
                                     <?php
-                                    if ($gpec_species[0]->species_division != ""){
-                                        echo " & ".$gpec_species[0]->species_division;
+                                    if ($gpec_species[0]->species_classname != ""){
+                                        echo " / ".$gpec_species[0]->species_classname;
                                     }
                                     ?>
-                                </h4>
-                                <h4>
-                                    <?php if (count($synonyms )>0){ ?>
-                                        <label class="label label-info">Datos de Taxonom&iacute;a y Nomenclatura</label>
-                                        <?php foreach ($synonyms as $syn){
-                                            echo "<p>".$syn->synonyms_htmlname."</p>";
-                                        }
+                                </p><br/>
+                                <?php if (count($synonyms )>0){ ?>
+                                    <?php foreach ($synonyms as $syn){
+                                        echo "<p>".$syn->synonyms_htmlname."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
-                                    ?>
-                                </h4>
+                                }
+                                else { echo "No tiene datos registrados"; }
+                                ?>
+
                                 <div class="">
-                                    <label class="label label-info">Origen e Invasibilidad</label>
+                                    <strong>Estatus de la especie en Cuba</strong>
                                     <?php if ($gpec_species[0]->species_origen != ""){
-                                        echo "<p> Introducido ".$gpec_species[0]->species_origen."</p>";
+                                        echo "<p>  ".$gpec_species[0]->species_origen."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_is_naturalized != ""){
-                                        echo "<p> Label species_is_naturalized ".$gpec_species[0]->species_is_naturalized."</p>";
+                                    <?php if ($invasive[0]->species_is_naturalized != ""){
+                                        echo "<p>  ".$invasive[0]->species_is_naturalized."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_is_invasive != ""){
-                                        echo "<p> Label species_is_invasive ".$gpec_species[0]->species_is_invasive."</p>";
+                                    <?php if ($invasive[0]->species_is_invasive != ""){
+                                        echo "<p>  ".$invasive[0]->species_is_invasive."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_is_atransformer != ""){
-                                        echo "<p> Label species_is_atransformer ".$gpec_species[0]->species_is_atransformer."</p>";
+                                    <?php if ($invasive[0]->species_is_atransformer != ""){
+                                        echo "<p> Transformadora ".$invasive[0]->species_is_atransformer."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_is_aweed != ""){
-                                        echo "<p> Label species_is_aweed ".$gpec_species[0]->species_is_aweed."</p>";
+                                    <?php if ($invasive[0]->species_is_aweed != ""){
+                                        echo "<p> Maleza ".$invasive[0]->species_is_aweed."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_naturalization_reference != ""){
+                                    <?php
+                                    echo "Referencia de naturalizacion en Cuba<br/>";
+                                    echo "Informacion no disponible<br/>";
+                                    if ($gpec_species[0]->species_naturalization_reference != "" and $gpec_species[0]->species_naturalization_reference != "Null"){
                                         echo "<p>   ".$gpec_species[0]->species_naturalization_reference."</p>";
                                     }
                                     else { echo "No tiene datos registrados"; }
@@ -116,30 +121,26 @@ get_header();
                                         echo "<p>   ".$gpec_species[0]->species_origen_notes."</p>";
                                     }?>
                                     <p>
-                                        <label class="label label-info">Justificación de invasivibilidad en Cuba</label>
-                                        <?php echo "species_invasive_rationale no esta?" ?>
+                                        <strong>Resumen de su estatus actual</strong><br/>
+                                        <?php echo "Informacion no disponible" ?>
                                     </p>
                                     <?php if ($gpec_species[0]->species_plant_growth_form != ""){
-                                        echo "<label class=\"label label-info\">Tipo de Planta</label>";
+                                        echo "<strong>Tipo de Planta</strong>";
                                         echo "<p> ".$gpec_species[0]->species_plant_growth_form."</p>";
                                     }?>
                                     <?php if (count($invasive_route)>0){
-                                        echo "<label class=\"label label-info\">Ruta de entrada y proliferación</label>";
+                                        echo "<strong>Ruta de entrada y proliferación</strong>";
                                         echo "<ul>";
-                                        foreach ($invasive_route as $invasive){
-                                            echo "<li>".$invasive->invasive_entry_route."</li>";
+                                        foreach ($invasive_route as $invasive_entr){
+                                            echo "<li>".$invasive_entr->invasive_entry_route."</li>";
                                         }
                                         echo "</ul>";
                                     }?>
 
-                                    <p><label class="label label-info">Tipo de impacto registrado</label></p>
-                                    <?php if ($gpec_species[0]->species_is_itseffectunknown != ""){
-                                        echo "<p>  ".$gpec_species[0]->species_is_itseffectunknown."</p>";
-                                    }?>
+                                    <p><strong>Tipo de impacto registrado</strong></p>
                                     <p>
                                         <?php if (count($invasive_impact)>0) { ?>
                                             <ul>
-                                                <li>invasive_impact_lookup</li>
                                                 <?php
                                                 foreach ($invasive_impact as $impact){
                                                     echo "<li>". $impact->invasive_impact_lookup."</li>";
@@ -148,15 +149,14 @@ get_header();
                                             </ul>
                                         <?php } ?>
                                     </p>
-
                                     <p>
-                                        <label class="label label-info">Sumario</label>
-                                        <?php echo "species_invasive_narrative no esta?" ?>
+                                        <strong>Invasion,Impacto y control en Cuba</strong><br/>
+                                        <?php echo "Informacion no disponible" ?>
                                     </p>
 
                                     <?php if (count($habitat)>0) { ?>
                                         <p>
-                                            <label class="label label-info">Tipos de hábitats usados por este taxón</label>
+                                            <label class="label label-info">Tipos de hábitats donde ha sido registrado</label>
                                             <ul>
                                                 <?php foreach ($habitat as $hab){
                                                     echo "<li>". $hab->habitats_lookup."</li>";
@@ -191,18 +191,17 @@ get_header();
                                             <br/>
                                             <ul>
                                                 <?php foreach ($references as $ref){
-                                                    echo "<span>".$ref->species_referencias_general."</span>";
+                                                    if ($ref->reference_type == "Invasiveness")
+                                                        echo "<span>".$ref->species_referencias_general."</span>";
                                                 }?>
                                             </ul>
                                         </div>
                                     <?php } ?>
-                                    <?php if (count($assessments)>0) { ?>
-                                        <p><label class="label label-info">Citación recomendada</label>
-                                            <?php foreach ($assessments as $asset){
-                                                echo "<blockquote>". $asset->summary_recommended_citation."</blockquote>";
-                                            }?>
+
+                                        <p>
+                                            <strong>Citación recomendada</strong>
+                                                <p>Informacion no disponible</p>
                                         </p>
-                                    <?php } ?>
 
                                     <div class="box-for-maps" style="margin-top: 50px;">
                                         <strong>Distribución</strong>

@@ -52,14 +52,13 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for=""> End&eacute;mica </label>
+                        <label for=""> End&eacute;mico </label>
                         <div class="form-group">
-                            <label class="radio-inline">
-                                <input type="radio" name="isendemism" id="isendemism" value="Yes" /> Si
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="isendemism" id="isendemism" value="No" checked="checked"/> No
-                            </label>
+                            <select name="isendemism" id="isendemism" class="form-control">
+                                <option value="-- Seleccione --">-- Seleccione --</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -81,11 +80,14 @@
                     </div>
                     <div class="col-md-4">
                         <label for=""> Criterios de la Lista Roja de la UICN </label>
-                        <input type="text"
-                               autocomplete="off"
-                               value="<?= $_POST['i_redlist_criteria'];?>"
-                               class="form-control"
-                               name="i_redlist_criteria" id="i_redlist_criteria" placeholder="redlist criteria">
+                        <select name="i_redlist_criteria" id="i_redlist_criteria" class="form-control">
+                            <option>--Seleccione--</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label for=""> Etiqueta a la categoría de la Lista Roja de la UICN </label>
@@ -109,7 +111,6 @@
                                class="form-control" id="prot_areas"
                                name="prot_areas" placeholder="Protected Areas"/>
                     </div>
-
                     <div class="col-md-4">
                         <label for=""> ¿se distribuye fuera de áreas protegidas?  </label>
                         <div class="form-group">
@@ -138,9 +139,6 @@
                         <?= $obj->get_combo_data("gpec_research_needed","researchneeds_lookup",
                             "-- Seleccione --","sel_researchneeds_lookup",$seleccion10); ?>
                     </div>
-
-
-
                     <div class="col-md-4">
                         <label for="">Tipo de Planta</label>
                         <?php $seleccion5 = $_POST['sel_species_grow_form']; ?>
@@ -186,8 +184,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
                 $fuera_areas_protegidas = $_REQUEST["radio_areas_protegidas"];
-                $isendemism = $_REQUEST["isendemism"];
-
+                $sel_isendemism = $_REQUEST["isendemism"];
                 $species_name_form = $_REQUEST["species_name_form"];
                 $sel_redlist_category = $_REQUEST["sel_redlist_category"];
                 $i_redlist_criteria = $_REQUEST["i_redlist_criteria"];
@@ -210,9 +207,10 @@
             }
             //preguntas para conformar el sql solo en la table gpec_species
             if ($singular_name != "") {//singular_name puede ser
-                $addsql .= " AND (sp.species_family LIKE '%{$singular_name}%' 
+                $addsql .= " AND (sp.species_family = '{$singular_name}' 
                     OR sp.species_genus LIKE '%{$singular_name}%' 
                     OR sp.species_name LIKE '%{$singular_name}%' 
+                    OR sp.species_htmlname LIKE '%{$singular_name}%' 
                     OR sp.species_infra_rank_name LIKE '%{$singular_name}%' 
                     OR syns.synonyms_genus LIKE '%{$singular_name}%' 
                     OR syns.synonyms_species_name LIKE '%{$singular_name}%' 
@@ -227,13 +225,8 @@
                 $addsql .= " AND comn.common_name LIKE '%{$common_names}%' ";
             if ($species_genus != "")
                 $addsql .= " AND sp.species_genus LIKE '%{$species_genus}%' ";
-            #Todo revisar isendemism values
-//            if ($isendemism == "Yes"){
-//                $addsql .= " AND sp.species_endemism LIKE '%Si%' ";
-//            }
-//            if ($isendemism == "No"){
-//                $addsql .= " AND sp.species_endemism LIKE '%No%' ";
-//            }
+            if ($sel_isendemism != "-- Seleccione --" and $sel_isendemism != "")
+                $addsql .= " AND sp.species_endemism = '{$sel_isendemism}' ";
             if ($species_grow_form != "-- Seleccione --" and $species_grow_form != "")
                 $addsql .= " AND sp.species_plant_growth_form = '{$species_grow_form}' ";
             if ($sel_use_lookup != "-- Seleccione --" and $sel_use_lookup != "")
@@ -253,7 +246,7 @@
             //table assesment redlist
             if ($sel_redlist_category != "" AND $sel_redlist_category != "-- Seleccione --")
                 $addsql .= " AND redlist.redlist_category LIKE '%{$sel_redlist_category}%' ";
-            if ($i_redlist_criteria != "" )
+            if ($i_redlist_criteria != "" AND $i_redlist_criteria != "--Seleccione--")
                 $addsql .= " AND redlist.redlist_criteria LIKE '%{$i_redlist_criteria}%' ";
             if ($sel_redlist_tag != "" AND $sel_redlist_tag != "-- Seleccione --")
                 $addsql .= " AND redlist.redlist_tag LIKE '%{$sel_redlist_tag}%' ";
@@ -286,7 +279,7 @@
             //query sql optimizadas
             $sql = "SELECT SQL_CALC_FOUND_ROWS
                         sp.id,sp.internal_taxon_id,sp.species_htmlname,
-                        sp.species_endemism_type,redlist.redlist_category
+                        sp.species_endemism,redlist.redlist_category
                     FROM
                         gpec_species AS sp
                         LEFT JOIN gpec_common_names AS comn ON comn.internal_taxon_id = sp.internal_taxon_id
@@ -355,11 +348,11 @@
                             </td>
                             <td>
                                 <?php
-                                if ($query[$i]->species_endemism_type != "" and $query[$i]->species_endemism_type != NULL ){
-                                    echo $query[$i]->species_endemism_type; } ?>
+                                if ($query[$i]->species_endemism != "" and $query[$i]->species_endemism != "Null" ){
+                                    echo $query[$i]->species_endemism; } ?>
                             </td>
                             <td>
-                                <?php if ($query[$i]->redlist_category != "" and $query[$i]->redlist_category != NULL ){?>
+                                <?php if ($query[$i]->redlist_category != "" and $query[$i]->redlist_category != "Null" ){?>
                                     <label class="label label-danger"> <?= $query[$i]->redlist_category ?> </label>
                                 <?php } ?>
                             </td>

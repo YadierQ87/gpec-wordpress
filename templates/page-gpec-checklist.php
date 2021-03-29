@@ -70,7 +70,7 @@ get_header();
                                             echo "No tiene registro";
                                         ?>
                                     </p>
-                                    <p>Tipo de end&eacute;mico: <br/>
+                                    <p> <br/>
                                         <?php
                                         if($gpec_species[0]->species_endemism_type != "")
                                             echo $gpec_species[0]->species_endemism_type;

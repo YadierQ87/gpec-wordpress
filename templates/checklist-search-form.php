@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for=""> Estatus de la especie en Cuba según su origen biogeográfico
-                            </label>
+                        </label>
                         <?php $seleccion7 = $_POST['sel_species_origen']; ?>
                         <?= $obj->get_combo_data("gpec_species","species_origen",
                             "-- Seleccione --","sel_species_origen",$seleccion7); ?>
@@ -240,7 +240,7 @@
             }
             //query sql optimizadas
             $sql = "SELECT SQL_CALC_FOUND_ROWS
-                        sp.id,sp.internal_taxon_id,sp.species_htmlname, syns.synonyms_htmlname 
+                        sp.id,sp.internal_taxon_id,sp.species_htmlname,sp.species_name, syns.synonyms_htmlname 
                     FROM
                         gpec_species AS sp                       
                         LEFT JOIN gpec_synonyms AS syns ON syns.internal_taxon_id = sp.internal_taxon_id
@@ -303,11 +303,16 @@
                                     <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-checklist/?id={$query[$i]->id}" ?>">
                                         <?= $query[$i]->species_htmlname ?>
                                     </a>
-                                </span>
+                                    </span>
                                 <?php   }
                                 else{
-                                    echo "No tiene species_htmlname configurado";
-                                }
+                                    echo "(No tiene species_htmlname configurado)"; ?>
+                                    <span>
+                                    <a href="<?php echo get_site_url(add_query_arg(array($_GET), $wp->request))."/gpec-checklist/?id={$query[$i]->id}" ?>">
+                                       Nombre Especie: <?= $query[$i]->species_name ?>
+                                    </a>
+                                    </span>
+                              <?php  }
                                 ?>
                                 <div>
                                     <?php

@@ -186,6 +186,7 @@
                 $sel_habitat_lookup = $_REQUEST["sel_habitat_lookup"];
                 $protected_areas = $_REQUEST["prot_areas"];
                 $fuera_areas_protegidas = $_REQUEST["radio_areas_protegidas"];
+                $isendemism = $_REQUEST["isendemism"];
 
                 $species_name_form = $_REQUEST["species_name_form"];
                 $sel_redlist_category = $_REQUEST["sel_redlist_category"];
@@ -226,6 +227,13 @@
                 $addsql .= " AND comn.common_name LIKE '%{$common_names}%' ";
             if ($species_genus != "")
                 $addsql .= " AND sp.species_genus LIKE '%{$species_genus}%' ";
+            #Todo revisar isendemism values
+//            if ($isendemism == "Yes"){
+//                $addsql .= " AND sp.species_endemism LIKE '%Si%' ";
+//            }
+//            if ($isendemism == "No"){
+//                $addsql .= " AND sp.species_endemism LIKE '%No%' ";
+//            }
             if ($species_grow_form != "-- Seleccione --" and $species_grow_form != "")
                 $addsql .= " AND sp.species_plant_growth_form = '{$species_grow_form}' ";
             if ($sel_use_lookup != "-- Seleccione --" and $sel_use_lookup != "")

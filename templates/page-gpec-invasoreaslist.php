@@ -37,7 +37,7 @@ get_header();
                                 <?php do_action('back_button'); ?>
                                 <h3>Registro de plantas introducidas e invasoras en Cuba</h3>
 
-                                <label class="label label-default"> Hoja de Datos </label>
+                                <strong> Hoja de Datos </strong>
                                 <h4><?php if ($gpec_species[0]->species_htmlname != "") {
                                         echo $gpec_species[0]->species_htmlname;
                                     }
@@ -76,7 +76,7 @@ get_header();
                                         echo "<p>".$syn->synonyms_htmlname."</p>";
                                     }
                                 }
-                                else { echo "No tiene datos registrados"; }
+                                else { echo "Información no disponible"; }
                                 ?>
 
                                 <div class="">
@@ -84,47 +84,47 @@ get_header();
                                     <?php if ($gpec_species[0]->species_origen != ""){
                                         echo "<p>  ".$gpec_species[0]->species_origen."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
                                     <?php if ($invasive[0]->species_is_naturalized != ""){
                                         echo "<p>  ".$invasive[0]->species_is_naturalized."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
                                     <?php if ($invasive[0]->species_is_invasive != ""){
                                         echo "<p>  ".$invasive[0]->species_is_invasive."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
                                     <?php if ($invasive[0]->species_is_atransformer != ""){
                                         echo "<p> Transformadora ".$invasive[0]->species_is_atransformer."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
                                     <?php if ($invasive[0]->species_is_aweed != ""){
                                         echo "<p> Maleza ".$invasive[0]->species_is_aweed."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
                                     <?php
-                                    echo "Referencia de naturalizacion en Cuba<br/>";
+                                    echo "Referencia de naturalización en Cuba<br/>";
                                     echo "Informacion no disponible<br/>";
                                     if ($gpec_species[0]->species_naturalization_reference != "" and $gpec_species[0]->species_naturalization_reference != "Null"){
                                         echo "<p>   ".$gpec_species[0]->species_naturalization_reference."</p>";
                                     }
-                                    else { echo "No tiene datos registrados"; }
+                                    else { echo "Información no disponible"; }
                                     ?>
-                                    <?php if ($gpec_species[0]->species_herbarium_specimen != ""){
+                                    <?php if ($gpec_species[0]->species_herbarium_specimen != "" and $gpec_species[0]->species_herbarium_specimen != "Null"){
                                         echo "<p>   ".$gpec_species[0]->species_herbarium_specimen."</p>";
                                     }?>
-                                    <?php if ($gpec_species[0]->species_origen_notes != ""){
+                                    <?php if ($gpec_species[0]->species_origen_notes != "" and $gpec_species[0]->species_origen_notes != "Null"){
                                         echo "<p>   ".$gpec_species[0]->species_origen_notes."</p>";
                                     }?>
                                     <p>
                                         <strong>Resumen de su estatus actual</strong><br/>
                                         <?php echo "Informacion no disponible" ?>
                                     </p>
-                                    <?php if ($gpec_species[0]->species_plant_growth_form != ""){
+                                    <?php if ($gpec_species[0]->species_plant_growth_form != "" and $gpec_species[0]->species_plant_growth_form != "Null"){
                                         echo "<strong>Tipo de Planta</strong>";
                                         echo "<p> ".$gpec_species[0]->species_plant_growth_form."</p>";
                                     }?>
@@ -156,7 +156,7 @@ get_header();
 
                                     <?php if (count($habitat)>0) { ?>
                                         <p>
-                                            <label class="label label-info">Tipos de hábitats donde ha sido registrado</label>
+                                            <strong>Tipos de hábitats donde ha sido registrado</strong>
                                             <ul>
                                                 <?php foreach ($habitat as $hab){
                                                     echo "<li>". $hab->habitats_lookup."</li>";
@@ -166,7 +166,7 @@ get_header();
                                     <?php } ?>
 
                                     <?php if (count($protected)>0) { ?>
-                                        <p><label class="label label-info">Áreas Protegidas donde ha sido registrada su presencia</label>
+                                        <p><strong>Áreas Protegidas donde ha sido registrada su presencia</strong>
                                         <ul>
                                             <?php foreach ($protected as $prot){
                                                 echo "<li>".$prot->ap_name."</li>";
@@ -176,7 +176,7 @@ get_header();
                                     <?php } ?>
 
                                     <?php if (count($use_lookup)>0) { ?>
-                                        <p><label class="label label-info">Usos del taxón en Cuba</label>
+                                        <p><strong>Usos del taxón en Cuba</strong>
                                         <ul>
                                             <?php foreach ($use_lookup as $uses){
                                                 echo "<li>". $uses->use_lookup."</li>";
@@ -187,7 +187,7 @@ get_header();
 
                                     <?php if (count($references)>0) { ?>
                                         <div>
-                                            <label class="label label-info"> Referencias </label>
+                                            <strong> Referencias </strong>
                                             <br/>
                                             <ul>
                                                 <?php foreach ($references as $ref){
@@ -200,7 +200,7 @@ get_header();
 
                                         <p>
                                             <strong>Citación recomendada</strong>
-                                                <p>Informacion no disponible</p>
+                                                <p>Información no disponible</p>
                                         </p>
 
                                     <div class="box-for-maps" style="margin-top: 50px;">
